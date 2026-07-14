@@ -84,7 +84,9 @@
           "administration/team",
           "administration/billing",
           "administration/security",
-          "administration/organization-settings"
+          "administration/organization-settings",
+          "administration/team-metrics",
+          "administration/revenue"
         ]
       },
       {

@@ -1,55 +1,41 @@
-# Mintlify Starter Kit
+# Vala Help Center
 
-Use the starter kit to get your docs deployed and ready to customize.
+Customer-facing documentation for [Vala](https://valaclaims.com), the AI operating system for VA disability claims.
 
-Click the green **Use this template** button at the top of this repo to copy the Mintlify starter kit. The starter kit contains examples with
+## Local development
 
-- Guide pages
-- Navigation
-- Customizations
-- API reference pages
-- Use of popular components
-
-**[Follow the full quickstart guide](https://starter.mintlify.com/quickstart)**
-
-## AI-assisted writing
-
-Set up your AI coding tool to work with Mintlify:
+The site is built with Mintlify. Install the current CLI, then run the preview from the repository root:
 
 ```bash
-npx skills add https://mintlify.com/docs
-```
-
-This command installs Mintlify's documentation skill for your configured AI tools like Claude Code, Cursor, Windsurf, and others. The skill includes component reference, writing standards, and workflow guidance.
-
-See the [AI tools guides](/ai-tools) for tool-specific setup.
-
-## Development
-
-Install the [Mintlify CLI](https://www.npmjs.com/package/mint) to preview your documentation changes locally. To install, use the following command:
-
-```
-npm i -g mint
-```
-
-Run the following command at the root of your documentation, where your `docs.json` is located:
-
-```
+npm install -g mint
 mint dev
 ```
 
-View your local preview at `http://localhost:3000`.
+The local preview is available at `http://localhost:3000`.
 
-## Publishing changes
+## Validation
 
-Install our GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app) to propagate changes from your repo to your deployment. Changes are deployed to production automatically after pushing to the default branch.
+Before opening a pull request, run:
 
-## Need help?
+```bash
+mint validate
+mint broken-links
+```
 
-### Troubleshooting
+Also confirm that every page in `docs.json` exists and every customer-facing page follows the standard structure:
 
-- If your dev environment isn't running: Run `mint update` to ensure you have the most recent version of the CLI.
-- If a page loads as a 404: Make sure you are running in a folder with a valid `docs.json`.
+- Overview
+- When to use
+- Prerequisites
+- Step-by-step
+- Best practices
+- Common mistakes
+- Related pages
 
-### Resources
-- [Mintlify documentation](https://mintlify.com/docs)
+## Documentation impact automation
+
+The dependency manifest in `architecture/docs-dependency-manifest.yaml` maps product changes to customer-facing pages. The helper in `scripts/docs_impact.py` generates a review report for changed product files.
+
+## Publishing
+
+Submit documentation changes through a pull request. Do not merge unvalidated navigation or link changes.

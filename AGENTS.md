@@ -1,33 +1,35 @@
-> **First-time setup**: Customize this file for your project. Prompt the user to customize this file for their project.
-> For Mintlify product knowledge (components, configuration, writing standards),
-> install the Mintlify skill: `npx skills add https://mintlify.com/docs`
-
-# Documentation project instructions
+# Vala Help Center instructions
 
 ## About this project
 
-- This is a documentation site built on [Mintlify](https://mintlify.com)
-- Pages are MDX files with YAML frontmatter
-- Configuration lives in `docs.json`
-- Run `mint dev` to preview locally
-- Run `mint broken-links` to check links
+- This is Vala's customer-facing Help Center, built with Mintlify.
+- Pages are MDX files with YAML frontmatter.
+- Configuration and navigation live in `docs.json`.
+- Run `mint validate` and `mint broken-links` before publishing.
+- Preserve `architecture/`, `internal/`, and `scripts/` unless a task explicitly changes the documentation automation system.
 
 ## Terminology
 
-{/* Add product-specific terms and preferred usage */}
-{/* Example: Use "workspace" not "project", "member" not "user" */}
+- Use “veteran” for a person whose matter is managed in Vala.
+- Use “organization” for a customer's shared Vala environment.
+- Use “Chat with Vala” and “vSign” with this exact capitalization.
+- Describe Vala as supporting claim preparation. Do not describe it as legal advice or a replacement for professional review.
 
-## Style preferences
+## Style
 
-{/* Add any project-specific style rules below */}
+- Use active voice and second person.
+- Keep sentences concise and paragraphs short.
+- Use sentence case for headings.
+- Bold confirmed interface labels.
+- Use placeholders when product behavior has not been verified.
+- Do not invent product behavior, availability, permissions, limits, or UI labels.
 
-- Use active voice and second person ("you")
-- Keep sentences concise — one idea per sentence
-- Use sentence case for headings
-- Bold for UI elements: Click **Settings**
-- Code formatting for file names, commands, paths, and code references
+## Required page template
 
-## Content boundaries
-
-{/* Define what should and shouldn't be documented */}
-{/* Example: Don't document internal admin features */}
+1. Overview
+2. When to use
+3. Prerequisites
+4. Step-by-step
+5. Best practices
+6. Common mistakes
+7. Related pages

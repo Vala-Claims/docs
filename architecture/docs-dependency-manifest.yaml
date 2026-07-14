@@ -1,5 +1,5 @@
 version: 2
-updated: 2026-07-13
+updated: 2026-07-14
 source_repositories:
   product: Vala-Claims/vala
   docs: Vala-Claims/docs
@@ -69,7 +69,7 @@ pages:
     review: [text, screenshot, walkthrough]
 
   timeline:
-    path: features/timeline.mdx
+    path: ai/timeline.mdx
     features: [timeline, chronology, service_history, medical_history]
     upstream_paths:
       - src/components/**/*Timeline*
@@ -82,7 +82,7 @@ pages:
     review: [text, screenshot, walkthrough]
 
   chat_with_vala:
-    path: features/chat-with-vala.mdx
+    path: ai/chat-with-vala.mdx
     features: [ai_chat, citations, document_questions]
     upstream_paths:
       - src/components/**/*Chat*
@@ -146,7 +146,7 @@ pages:
     review: [text, screenshot, walkthrough]
 
   calls:
-    path: features/calls-and-transcripts.mdx
+    path: ai/calls-and-transcripts.mdx
     features: [calls, transcription, guided_scripts, call_records]
     upstream_paths:
       - src/components/**/*Call*
@@ -158,7 +158,7 @@ pages:
     review: [text, screenshot, walkthrough]
 
   quicksubmit:
-    path: features/quicksubmit.mdx
+    path: core-workflows/quicksubmit.mdx
     features: [quicksubmit, browser_extension, submission, va_upload]
     upstream_paths:
       - src/components/**/*QuickSubmit*
@@ -183,7 +183,7 @@ pages:
     review: [text, screenshot]
 
   billing_plans:
-    path: administration/billing-and-plans.mdx
+    path: administration/billing.mdx
     features: [billing, plans, usage_limits, overages, feature_visibility, editions]
     upstream_paths:
       - src/components/**/*Billing*

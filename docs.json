@@ -41,7 +41,7 @@
         ]
       },
       {
-        "group": "Core Workflows",
+        "group": "Veteran Records",
         "pages": [
           "core-workflows/veterans",
           "core-workflows/claims",

@@ -43,7 +43,7 @@
       {
         "group": "Veteran Records",
         "pages": [
-          "beteran",
+          "veteran-records/create-a-veteran",
           "core-workflows/claims",
           "core-workflows/evidence",
           "core-workflows/conditions",

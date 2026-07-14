@@ -45,9 +45,9 @@
         "pages": [
           "veteran-records/create-a-veteran",
           "core-workflows/claims",
-          "core-workflows/evidence",
-          "core-workflows/conditions",
           "core-workflows/forms-and-vsign",
+          "core-workflows/documents",
+          "core-workflows/conditions",
           "core-workflows/tasks",
           "core-workflows/automations"
         ]

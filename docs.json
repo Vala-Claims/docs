@@ -54,9 +54,10 @@
       {
         "group": "Tools",
         "pages": [
+          "core-workflows/notes",
           "core-workflows/tasks",
           "core-workflows/automations",
-          "core-workflows/notes"
+          "core-workflows/library"
         ]
       },
       {

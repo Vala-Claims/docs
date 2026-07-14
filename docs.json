@@ -1,34 +1,82 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint",
+  "theme": "maple",
   "name": "Vala Help Center",
   "colors": {
-    "primary": "#6D5DFB",
-    "light": "#8B7CFF",
-    "dark": "#4C3BD9"
+    "primary": "#F95B00",
+    "light": "#FF7A2F",
+    "dark": "#F95B00"
   },
-  "favicon": "/favicon.svg",
+  "background": {
+    "color": {
+      "light": "#FFFCF8",
+      "dark": "#171717"
+    }
+  },
+  "fonts": {
+    "family": "Inter",
+    "heading": {
+      "family": "PT Serif",
+      "weight": 700
+    },
+    "body": {
+      "family": "Inter",
+      "weight": 400
+    }
+  },
+  "favicon": "/favicon.png",
+  "logo": {
+    "light": "/logo/vala-mark.png",
+    "dark": "/logo/vala-wordmark-dark.png",
+    "href": "https://valaclaims.com"
+  },
   "navigation": {
-    "tabs": [
+    "groups": [
       {
-        "tab": "Guides",
-        "groups": [
-          {
-            "group": "Getting started",
-            "pages": [
-              "getting-started/welcome",
-              "getting-started/quickstart"
-            ]
-          },
-          {
-            "group": "Core workflows",
-            "pages": [
-              "workflows/veterans",
-              "features/chat-with-vala",
-              "workflows/reports",
-              "workflows/forms-and-vsign"
-            ]
-          }
+        "group": "Start Here",
+        "pages": [
+          "getting-started/welcome",
+          "getting-started/quickstart",
+          "getting-started/upload-your-first-veteran"
+        ]
+      },
+      {
+        "group": "Core Workflows",
+        "pages": [
+          "core-workflows/organizations",
+          "core-workflows/veterans",
+          "core-workflows/claims",
+          "core-workflows/evidence",
+          "core-workflows/conditions",
+          "core-workflows/reports",
+          "core-workflows/forms-and-vsign",
+          "core-workflows/tasks",
+          "core-workflows/automations"
+        ]
+      },
+      {
+        "group": "AI",
+        "pages": [
+          "ai/chat-with-vala",
+          "ai/timeline",
+          "ai/calls-and-transcripts"
+        ]
+      },
+      {
+        "group": "Administration",
+        "pages": [
+          "administration/team",
+          "administration/billing",
+          "administration/security",
+          "administration/organization-settings"
+        ]
+      },
+      {
+        "group": "Resources",
+        "pages": [
+          "resources/faq",
+          "resources/troubleshooting",
+          "resources/release-notes"
         ]
       }
     ],
@@ -38,19 +86,24 @@
           "anchor": "Vala",
           "href": "https://valaclaims.com",
           "icon": "house"
+        },
+        {
+          "anchor": "Support",
+          "href": "mailto:support@valaclaims.com",
+          "icon": "life-ring"
         }
       ]
     }
-  },
-  "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
   },
   "navbar": {
     "links": [
       {
         "label": "Vala website",
         "href": "https://valaclaims.com"
+      },
+      {
+        "label": "Support",
+        "href": "mailto:support@valaclaims.com"
       }
     ],
     "primary": {
@@ -59,16 +112,77 @@
       "href": "https://app.valaclaims.com"
     }
   },
+  "footer": {
+    "socials": {
+      "website": "https://valaclaims.com"
+    },
+    "links": [
+      {
+        "header": "Product",
+        "items": [
+          {
+            "label": "Open Vala",
+            "href": "https://app.valaclaims.com"
+          },
+          {
+            "label": "Vala website",
+            "href": "https://valaclaims.com"
+          },
+          {
+            "label": "Book a demo",
+            "href": "https://valaclaims.com/book-demo"
+          }
+        ]
+      },
+      {
+        "header": "Help",
+        "items": [
+          {
+            "label": "FAQ",
+            "href": "/resources/faq"
+          },
+          {
+            "label": "Troubleshooting",
+            "href": "/resources/troubleshooting"
+          },
+          {
+            "label": "Contact support",
+            "href": "mailto:support@valaclaims.com"
+          }
+        ]
+      },
+      {
+        "header": "Legal",
+        "items": [
+          {
+            "label": "Terms",
+            "href": "https://valaclaims.com/legal/terms"
+          },
+          {
+            "label": "Privacy",
+            "href": "https://valaclaims.com/legal/privacy"
+          },
+          {
+            "label": "Accessibility",
+            "href": "https://valaclaims.com/legal/accessibility"
+          }
+        ]
+      }
+    ]
+  },
+  "interaction": {
+    "drilldown": false
+  },
+  "styling": {
+    "eyebrows": "breadcrumbs",
+    "codeblocks": "system"
+  },
   "contextual": {
     "options": [
       "copy",
       "view",
       "chatgpt",
-      "claude",
-      "perplexity",
-      "mcp",
-      "cursor",
-      "vscode"
+      "claude"
     ]
   }
 }

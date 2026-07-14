@@ -48,14 +48,16 @@
           "core-workflows/forms-and-vsign",
           "core-workflows/documents",
           "core-workflows/messages",
-          "core-workflows/conditions",
-          "core-workflows/tasks",
-          "core-workflows/automations"
+          "core-workflows/conditions"
         ]
       },
       {
         "group": "Tools",
-        "pages": []
+        "pages": [
+          "core-workflows/tasks",
+          "core-workflows/automations",
+          "core-workflows/notes"
+        ]
       },
       {
         "group": "AI",

@@ -43,7 +43,6 @@
       {
         "group": "Core Workflows",
         "pages": [
-          "core-workflows/organizations",
           "core-workflows/veterans",
           "core-workflows/claims",
           "core-workflows/evidence",

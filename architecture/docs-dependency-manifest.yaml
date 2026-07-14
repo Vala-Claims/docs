@@ -1,0 +1,116 @@
+version: 1
+updated: 2026-07-13
+source_repositories:
+  product: Vala-Claims/vala
+  docs: Vala-Claims/docs
+
+rules:
+  ui_change_requires:
+    - text_review
+    - screenshot_review
+  workflow_change_requires:
+    - text_update
+    - dependency_review
+    - walkthrough_review
+  signer_or_submission_change_requires:
+    - forms_vsign_review
+    - quickstart_review
+  backend_only_change:
+    default: no_customer_docs
+    exceptions:
+      - behavior_changed
+      - limits_changed
+      - permissions_changed
+      - generated_output_changed
+
+pages:
+  welcome:
+    path: index.mdx
+    features: [dashboard, organizations, veterans, chat, reports, forms, vsign]
+    upstream_paths:
+      - src/components/Dashboard/**
+      - src/pages/**/dashboard*
+    review: [text, screenshot]
+
+  quickstart:
+    path: getting-started/quickstart.mdx
+    features: [organizations, veterans, document_upload, chat, reports, forms, vsign]
+    upstream_paths:
+      - src/components/ClientForm.svelte
+      - src/components/ClientDetailsPage/**
+      - src/components/VSign/**
+      - src/components/Forms/**
+    depends_on_pages: [veterans, chat_with_vala, reports, forms_vsign]
+    review: [text, screenshot, walkthrough]
+
+  veterans:
+    path: core-workflows/veterans.mdx
+    features: [veterans, contacts, relationships, primary_point_of_contact]
+    upstream_paths:
+      - src/components/ClientForm.svelte
+      - src/components/ClientDetailsPage/**
+      - src/components/Contacts/**
+      - src/components/ContactsPage/**
+      - backend/internal/handlers/client.go
+      - backend/internal/service/client.go
+    downstream_pages: [quickstart, forms_vsign]
+    review: [text, screenshot]
+
+  chat_with_vala:
+    path: features/chat-with-vala.mdx
+    features: [ai_chat, citations, document_questions]
+    upstream_paths:
+      - src/components/**/*Chat*
+      - src/pages/**/*chat*
+      - backend/internal/**/*chat*
+      - agents/**/*chat*
+    downstream_pages: [quickstart, reports]
+    review: [text, screenshot, walkthrough]
+
+  reports:
+    path: core-workflows/reports.mdx
+    features: [reports, chronology, theory_report, evidence, conditions]
+    upstream_paths:
+      - src/components/**/*Report*
+      - src/components/**/*Condition*
+      - src/components/**/*Evidence*
+      - backend/internal/**/*report*
+      - agents/**/*report*
+    depends_on_pages: [veterans, chat_with_vala]
+    downstream_pages: [quickstart]
+    review: [text, screenshot, walkthrough]
+
+  forms_vsign:
+    path: core-workflows/forms-and-vsign.mdx
+    features: [forms, pdf_autofill, wysiwyg, vsign, signing_packets, client_portal]
+    upstream_paths:
+      - src/components/Forms/**
+      - src/components/VSign/**
+      - src/components/ClientPortal/VSignEnvelopePage.svelte
+      - src/components/ClientPortal/SignaturesTab.svelte
+      - src/components/ClientDetailsPage/Tabs/IntakeCallForms/**
+      - src/lib/pdfClientForms.ts
+      - src/types/esign.ts
+      - backend/internal/handlers/esign.go
+      - backend/internal/handlers/pdf.go
+      - backend/internal/service/esign.go
+      - backend/internal/service/pdf.go
+      - backend/internal/service/vsign.go
+      - agents/pdf_fill/**
+    depends_on_pages: [veterans]
+    downstream_pages: [quickstart]
+    review: [text, screenshot, walkthrough]
+
+feature_edges:
+  primary_point_of_contact:
+    affects: [veterans, forms_vsign, quickstart]
+  signing_packets:
+    affects: [forms_vsign, quickstart]
+  pdf_autofill:
+    affects: [forms_vsign, veterans, quickstart]
+  conditions:
+    affects: [reports, quickstart]
+  evidence:
+    affects: [reports, chat_with_vala, quickstart]
+  ai_chat:
+    affects: [chat_with_vala, reports, quickstart]

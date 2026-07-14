@@ -59,7 +59,14 @@
           "core-workflows/web-forms",
           "core-workflows/tasks",
           "core-workflows/automations",
-          "core-workflows/message-templates"
+          "core-workflows/message-templates",
+          {
+            "group": "Calculators",
+            "pages": [
+              "backpay-calculator",
+              "untitled-page"
+            ]
+          }
         ]
       },
       {

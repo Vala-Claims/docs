@@ -47,6 +47,7 @@
           "core-workflows/claims",
           "core-workflows/forms-and-vsign",
           "core-workflows/documents",
+          "core-workflows/messages",
           "core-workflows/conditions",
           "core-workflows/tasks",
           "core-workflows/automations"

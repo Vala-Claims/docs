@@ -56,9 +56,10 @@
         "pages": [
           "core-workflows/notes",
           "core-workflows/library",
+          "core-workflows/web-forms",
           "core-workflows/tasks",
           "core-workflows/automations",
-          "core-workflows/web-forms"
+          "core-workflows/message-templates"
         ]
       },
       {

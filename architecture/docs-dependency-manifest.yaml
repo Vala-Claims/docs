@@ -116,7 +116,7 @@ pages:
     features: [claims, claim_records, claim_views]
     upstream_paths:
       - src/pages/claims.astro
-      - src/components/ClaimsPage/**
+      - src/components/ClaimsPage/index.svelte
       - src/components/ClaimsManagement/**
       - src/components/ClientDetailsPage/Tabs/Claims/**
       - src/lib/navigation/workspaceNav.ts
@@ -124,6 +124,49 @@ pages:
       - backend/internal/service/claim.go
     downstream_pages: [quickstart]
     review: [text, screenshot, walkthrough]
+
+  claim_details:
+    path: claims/details.mdx
+    features: [claims, claim_records, conditions, evidence, forms, tasks, comments]
+    upstream_paths:
+      - src/components/ClaimsPage/ClaimsDetails/ClaimInfoCard.svelte
+      - src/components/ClaimsPage/ClaimsDetails/DocumentSelectionDialog.svelte
+      - src/components/ClaimsPage/ClaimsDetails/AddFormToClaimDialog.svelte
+      - src/components/ClaimsPage/ClaimsDetails/TasksSection/**
+      - src/lib/claimWorkspace.ts
+      - backend/internal/handlers/claim.go
+      - backend/internal/service/claim.go
+    review: [text, screenshot, walkthrough]
+
+  claim_dates:
+    path: claims/dates.mdx
+    features: [claims, claim_dates, document_findings]
+    upstream_paths:
+      - src/components/ClaimsPage/ClaimsDetails/ClaimDatesSection.svelte
+      - src/lib/claim-date-sources.ts
+      - backend/internal/handlers/claim.go
+      - backend/internal/service/claim.go
+    review: [text, screenshot]
+
+  claim_history:
+    path: claims/history.mdx
+    features: [claims, claim_history, claim_audit]
+    upstream_paths:
+      - src/components/ClaimsPage/ClaimsDetails/ClaimHistorySection.svelte
+      - backend/internal/handlers/claim.go
+      - backend/internal/service/claim_history.go
+    review: [text, screenshot]
+
+  claim_financials:
+    path: claims/financials.mdx
+    features: [claims, claim_financials, document_findings, permissions]
+    upstream_paths:
+      - src/components/ClaimsPage/ClaimsDetails/ClaimFinancialsSection.svelte
+      - src/lib/claim-financial-findings.ts
+      - src/types/claim-financial.ts
+      - backend/internal/handlers/claim_financial.go
+      - backend/internal/service/claim_financial.go
+    review: [text, screenshot]
 
   conditions:
     path: core-workflows/conditions.mdx

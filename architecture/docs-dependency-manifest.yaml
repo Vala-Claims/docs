@@ -1,5 +1,5 @@
 version: 2
-updated: 2026-07-14
+updated: 2026-08-06
 source_repositories:
   product: Vala-Claims/vala
   docs: Vala-Claims/docs
@@ -17,24 +17,24 @@ rules:
 pages:
   welcome:
     path: index.mdx
-    features: [dashboard, organizations, veterans, chat, reports, forms, vsign]
+    features: [dashboard, contacts, clients, ask_vala, reports, forms, vsign]
     upstream_paths: [src/components/Dashboard/**, src/pages/**/dashboard*]
     review: [text, screenshot]
 
   quickstart:
     path: getting-started/quickstart.mdx
-    features: [organizations, veterans, document_upload, chat, reports, forms, vsign]
+    features: [contacts, clients, documents, ask_vala, reports, forms, vsign]
     upstream_paths:
       - src/components/ClientForm.svelte
       - src/components/ClientDetailsPage/**
       - src/components/VSign/**
       - src/components/Forms/**
-    depends_on_pages: [veterans, chat_with_vala, reports, forms_vsign]
+    depends_on_pages: [clients, documents, ask_vala, reports, forms_vsign]
     review: [text, screenshot, walkthrough]
 
-  veterans:
-    path: core-workflows/veterans.mdx
-    features: [veterans, contacts, relationships, primary_point_of_contact]
+  clients:
+    path: veteran-records/create-a-veteran.mdx
+    features: [clients, contacts, veterans, relationships, primary_point_of_contact]
     upstream_paths:
       - src/components/ClientForm.svelte
       - src/components/ClientDetailsPage/**
@@ -54,36 +54,27 @@ pages:
       - backend/internal/**/*condition*
       - backend/internal/**/*rating*
       - agents/**/*condition*
-    downstream_pages: [reports, timeline, quickstart]
-    review: [text, screenshot, walkthrough]
-
-  evidence:
-    path: core-workflows/evidence.mdx
-    features: [evidence, citations, document_analysis, evidence_linking]
-    upstream_paths:
-      - src/components/**/*Evidence*
-      - src/components/**/*Citation*
-      - backend/internal/**/*evidence*
-      - agents/**/*evidence*
-    downstream_pages: [chat_with_vala, reports, timeline, quickstart]
-    review: [text, screenshot, walkthrough]
-
-  timeline:
-    path: ai/timeline.mdx
-    features: [timeline, chronology, service_history, medical_history]
-    upstream_paths:
-      - src/components/**/*Timeline*
-      - src/components/**/*Chronolog*
-      - backend/internal/**/*timeline*
-      - backend/internal/**/*chronolog*
-      - agents/**/*timeline*
-    depends_on_pages: [veterans, conditions, evidence]
+    depends_on_pages: [clients, documents]
     downstream_pages: [reports, quickstart]
     review: [text, screenshot, walkthrough]
 
-  chat_with_vala:
+  documents:
+    path: core-workflows/documents.mdx
+    features: [documents, evidence, citations, document_analysis, evidence_linking]
+    upstream_paths:
+      - src/components/**/*Document*
+      - src/components/**/*Evidence*
+      - src/components/**/*Citation*
+      - backend/internal/**/*document*
+      - backend/internal/**/*evidence*
+      - agents/**/*document*
+      - agents/**/*evidence*
+    downstream_pages: [ask_vala, reports, quickstart]
+    review: [text, screenshot, walkthrough]
+
+  ask_vala:
     path: ai/chat-with-vala.mdx
-    features: [ai_chat, citations, document_questions]
+    features: [ask_vala, ai_chat, citations, document_questions]
     upstream_paths:
       - src/components/**/*Chat*
       - src/pages/**/*chat*
@@ -94,14 +85,14 @@ pages:
 
   reports:
     path: core-workflows/reports.mdx
-    features: [reports, chronology, theory_report, evidence, conditions, timeline]
+    features: [reports, chronology, theory_report, evidence, conditions]
     upstream_paths:
       - src/components/**/*Report*
       - src/components/**/*Condition*
       - src/components/**/*Evidence*
       - backend/internal/**/*report*
       - agents/**/*report*
-    depends_on_pages: [veterans, chat_with_vala, conditions, evidence, timeline]
+    depends_on_pages: [clients, ask_vala, conditions, documents]
     downstream_pages: [quickstart]
     review: [text, screenshot, walkthrough]
 
@@ -122,7 +113,7 @@ pages:
       - backend/internal/service/pdf.go
       - backend/internal/service/vsign.go
       - agents/pdf_fill/**
-    depends_on_pages: [veterans]
+    depends_on_pages: [clients]
     downstream_pages: [quickstart]
     review: [text, screenshot, walkthrough]
 
@@ -132,12 +123,12 @@ pages:
     upstream_paths:
       - src/components/**/*Task*
       - backend/internal/**/*task*
-    downstream_pages: [automations, quickstart]
+    downstream_pages: [workflows, quickstart]
     review: [text, screenshot]
 
-  automations:
+  workflows:
     path: core-workflows/automations.mdx
-    features: [automations, triggers, actions, notifications, task_automation]
+    features: [workflows, automations, triggers, actions, notifications, task_automation]
     upstream_paths:
       - src/components/**/*Automation*
       - backend/internal/**/*automation*
@@ -154,7 +145,7 @@ pages:
       - backend/internal/**/*call*
       - backend/internal/**/*transcri*
       - agents/transcription/**
-    downstream_pages: [chat_with_vala, veterans, quickstart]
+    downstream_pages: [ask_vala, clients, quickstart]
     review: [text, screenshot, walkthrough]
 
   quicksubmit:
@@ -166,7 +157,7 @@ pages:
       - browser-extension/**
       - extension/**
       - backend/internal/**/*submit*
-    depends_on_pages: [forms_vsign]
+    depends_on_pages: [forms_vsign, documents]
     downstream_pages: [quickstart]
     review: [text, screenshot, walkthrough]
 
@@ -197,18 +188,17 @@ pages:
     review: [text, screenshot]
 
 feature_edges:
-  primary_point_of_contact: {affects: [veterans, forms_vsign, quickstart]}
+  primary_point_of_contact: {affects: [clients, forms_vsign, quickstart]}
   signing_packets: {affects: [forms_vsign, quickstart]}
-  pdf_autofill: {affects: [forms_vsign, veterans, quickstart]}
-  conditions: {affects: [conditions, reports, timeline, quickstart]}
-  rating_decisions: {affects: [conditions, reports, timeline]}
-  evidence: {affects: [evidence, reports, chat_with_vala, timeline, quickstart]}
-  timeline: {affects: [timeline, reports, quickstart]}
-  ai_chat: {affects: [chat_with_vala, reports, quickstart]}
-  tasks: {affects: [tasks, automations, quickstart]}
-  automations: {affects: [automations, tasks, forms_vsign, quickstart]}
-  calls: {affects: [calls, veterans, chat_with_vala, quickstart]}
-  quicksubmit: {affects: [quicksubmit, forms_vsign, quickstart]}
+  pdf_autofill: {affects: [forms_vsign, clients, quickstart]}
+  conditions: {affects: [conditions, clients, reports, quickstart]}
+  rating_decisions: {affects: [conditions, reports]}
+  evidence: {affects: [documents, reports, ask_vala, quickstart]}
+  ai_chat: {affects: [ask_vala, reports, quickstart]}
+  tasks: {affects: [tasks, workflows, quickstart]}
+  automations: {affects: [workflows, tasks, forms_vsign, quickstart]}
+  calls: {affects: [calls, clients, ask_vala, quickstart]}
+  quicksubmit: {affects: [quicksubmit, forms_vsign, documents, quickstart]}
   permissions: {affects: [organization_admin, billing_plans, quickstart]}
   billing: {affects: [billing_plans, organization_admin]}
   feature_visibility: {affects: [billing_plans, welcome, quickstart]}

@@ -14,15 +14,20 @@ The documentation system should:
 
 ## Source-of-truth hierarchy
 
-When sources disagree, use this order:
+For current customer-visible behavior, use this order:
 
-1. Current shipped or merged Vala implementation
-2. Completed Linear implementation intent when it agrees with current implementation
-3. Current Vala Product Operating System guidance
+1. Production behavior in `app.valaclaims.com`
+2. Implementation confirmed released to the relevant customer audience
+3. Completed Linear acceptance criteria and context for that released behavior
 4. Existing Help Center documentation
-5. Draft RFCs and roadmap material
 
-Roadmap items must never be presented as available product functionality unless clearly labeled.
+For governance, terminology, product claims, and authority, use this order:
+
+1. Current canonical Vala Operating System
+2. Current accepted Product decisions and applicable authoritative records
+3. Historical or draft materials
+
+Merged but unreleased code is not current customer functionality. If current behavior conflicts with canonical policy or accepted Product intent, surface the mismatch for review rather than silently resolving it.
 
 ## Audience
 

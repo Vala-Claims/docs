@@ -57,11 +57,16 @@
         "group": "Contacts",
         "pages": [
           "contacts/overview",
-          "veteran-records/create-a-veteran",
-          "core-workflows/forms-and-vsign",
-          "core-workflows/documents",
-          "core-workflows/messages",
-          "core-workflows/conditions"
+          {
+            "group": "Clients",
+            "pages": [
+              "veteran-records/create-a-veteran",
+              "core-workflows/forms-and-vsign",
+              "core-workflows/documents",
+              "core-workflows/messages",
+              "core-workflows/conditions"
+            ]
+          }
         ]
       },
       {

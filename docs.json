@@ -76,7 +76,16 @@
       {
         "group": "Claims",
         "pages": [
-          "core-workflows/claims"
+          "core-workflows/claims",
+          {
+            "group": "Claim record",
+            "pages": [
+              "claims/details",
+              "claims/dates",
+              "claims/history",
+              "claims/financials"
+            ]
+          }
         ]
       },
       {

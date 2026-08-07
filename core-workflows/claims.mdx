@@ -1,57 +1,70 @@
 ---
 title: "Claims"
-description: "Track VA claim matters associated with Clients."
+description: "Organize claim work across Clients and open the record that needs attention."
 icon: "folder"
 ---
 
 ## Overview
 
-Claims tracks VA claim matters associated with Clients. The global Claims workspace includes <strong>All Claims</strong>, <strong>Open</strong>, <strong>Assigned to me</strong>, <strong>Ready to Review</strong>, <strong>Pending Evidence</strong>, <strong>Pending Decision</strong>, <strong>Submitted</strong>, and <strong>Closed</strong> views.
+Use **Claims** to review and organize claim work across your organization. The workspace lists the same Claim records that appear in a Client record's **Claims** tab. Use the global workspace to work across Clients, and the Client record when you need the surrounding client context.
 
-## When to use
+![The Claims workspace with views, filters, a configurable table, and claims for several Clients.](/images/claims/list.png)
 
-Use Claims when your organization needs to organize a VA claim matter and review related work.
+## Use views to focus your work
 
-## Prerequisites
+The left-side views are **All Claims**, **Open**, **Assigned to me**, **Ready to Review**, **Pending Evidence**, **Pending Decision**, **Submitted**, and **Closed**. Select a view to focus the table on that stage of work.
 
-- The correct Client record
-- Your organization's direction on the claim being prepared
+Search by claim or Client information, filter by tags, and use **Sort** to change the order. Select **Columns** to show or hide standard and configured custom-field columns, then reset the table layout when you want to return to its saved starting arrangement.
 
-## Step-by-step
+The table can include Client, Conditions, Category, Claim Number, Docket Number, Lane, Days Open, Current Lane Age, Assigned to, Filing Date, Decision Date, Appeal Deadline, ITF Expiration, Status, Portal Status, Tags, Tasks, Comments, and configured custom fields. Your organization can expose a different set of columns.
 
-<Note>
-  Detailed claim creation and status instructions are coming soon.
-</Note>
+Some table fields can be edited directly when you have access, including Category, Claim Number, Docket Number, Lane, Assigned to, dates, Status, and Portal Status. Open the Claim record for the full workspace.
+
+When you select one Claim, you can use **Quick view**, **Open record**, or **Edit**. Selecting one or more Claims also makes **Delete** available. Confirm that the selected records are the intended ones before using a selection action.
+
+## Understand Status and Review lane
+
+**Status** describes the current work state for a Claim. Current values include **Ready to Review**, **Pending Evidence**, **Pending Decision**, **Submitted**, and **Closed**.
+
+**Review lane** is a separate classification used for Compensation claims. The available lanes are **New**, **Supplemental**, **Increase**, **Higher Level Review**, **CUE**, **CAVC**, **TDIU**, **SMC**, and **Board Appeal**. A Review lane does not replace Status. For non-Compensation categories, the same Compensation lane choices do not apply in the same way.
+
+## Create a Claim
+
+Select **Add Claim** from the global workspace, or open a Client record and use its **Claims** tab to start with that Client already selected.
 
 <Steps>
-  <Step title="Confirm the Client">Verify the Client associated with the Claim.</Step>
-  <Step title="Identify the work">Follow your organization's process to define the claim-preparation scope.</Step>
-  <Step title="Review supporting work">Open the relevant Documents, Conditions, Reports, Forms &amp; vSign, and Tasks as needed.</Step>
-  <Step title="Review the matter">Confirm completeness and accuracy before any external use.</Step>
+  <Step title="Choose the Client">A Client is required. Select an existing Client, or start **Add Client** when it is available and you need to create the Client first.</Step>
+  <Step title="Choose the Claim category">A Claim category is required. Current categories are **Compensation (Disability)**, **Pension**, **Dependency & Survivor**, **Education**, **Housing & Loan**, **Healthcare**, **Burial & Memorial**, **Insurance**, and **Administrative / Other**.</Step>
+  <Step title="Complete category-specific fields">For Compensation, choose a Review lane and link at least one Condition. For a Board Appeal, select the applicable subtype.</Step>
+  <Step title="Add optional context">Add an appeal deadline, docket number, tags, or workspace custom fields when they apply, then select **Create Claim**.</Step>
 </Steps>
 
-## Claim record tabs
+![The Create New Claim dialog with a Client, category, review lane, dates, Conditions, and tags.](/images/claims/create-claim.png)
 
-Use <strong>Details</strong>, <strong>Dates</strong>, and <strong>History</strong> to review a Claim record. <strong>Financials</strong> appears only for viewers with permission.
+## Quick view or open the full record
 
-## From a Client record
+Select a Claim to open **Quick view** for a compact summary of its details, status, assignment, and dates. Choose **Open full claim record** when you need to prepare or review the work in depth.
 
-The **Claims** tab in a Client record is scoped to that Client. Search the Client's claims, select **Add Claim** when you need to create one, then open the Claim record for its details. The underlying Claim is the same record available from the global **Claims** workspace, so use the Client tab for client-specific context and the global workspace for work across Clients.
+![Quick view for a Claim record, with claim details and an option to open the full record.](/images/claims/quick-view.png)
 
-## Best practices
+## Work from a Client record
 
-- Keep the scope clear and consistent.
-- Separate verified facts from working notes or AI output.
-- Use your organization's review process before submission.
+The **Claims** tab in a Client record only shows that Client's claims. It does not create a second copy of the Claim. Changes you make there are reflected in the global Claims workspace and vice versa.
 
-## Common mistakes
+## Claim record guidance
 
-- Working in the wrong Claim or Client context
-- Treating a draft output as submission-ready
-- Leaving related work disconnected or unclear
+<CardGroup cols={2}>
+  <Card title="Claim Details" icon="folder-open" href="/claims/details">Prepare a Claim with Conditions, evidence, forms, tasks, comments, and review guidance.</Card>
+  <Card title="Claim Dates" icon="calendar" href="/claims/dates">Maintain filing, decision, appeal, ITF, and docket information.</Card>
+  <Card title="Claim History" icon="clock-rotate-left" href="/claims/history">Review changes to a Claim and filter the history by field group.</Card>
+  <Card title="Claim Financials" icon="dollar-sign" href="/claims/financials">Review permission-controlled financial records and document findings.</Card>
+</CardGroup>
 
 ## Related pages
 
 <CardGroup cols={2}>
-   
+  <Card title="Conditions" icon="heart-pulse" href="/core-workflows/conditions">Manage the Client Conditions that can be linked to a Claim.</Card>
+  <Card title="Documents" icon="file" href="/core-workflows/documents">Manage Client documents before linking supporting evidence to a Claim.</Card>
+  <Card title="Forms & vSign" icon="file-signature" href="/core-workflows/forms-and-vsign">Prepare and send forms using your organization's signing workflow.</Card>
+  <Card title="Tasks" icon="square-check" href="/core-workflows/tasks">Manage Client work that can be linked to a Claim.</Card>
 </CardGroup>

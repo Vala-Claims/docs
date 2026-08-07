@@ -10,10 +10,17 @@
 
 ## Terminology
 
-- Use “veteran” for a person whose matter is managed in Vala.
+- Use “veteran” naturally for the person being represented.
+- Use “Client” when referring to a visible Vala interface object, view, button, breadcrumb, or Client record. Do not rename the shipped interface label in prose.
 - Use “organization” for a customer's shared Vala environment.
-- Use “Chat with Vala” and “vSign” with this exact capitalization.
+- Use “Ask Vala” and “vSign” with this exact capitalization.
+- Use the current interface labels: **Templates** (not Library), **Templates > Questionnaires** (not Web Forms), **Workflows** (not Automations), **History** or **Workflow History** (not Execution Log), **Templates > Messages** (not Message Templates), and **Calls** (not Calls & Transcripts when naming the workspace).
 - Describe Vala as supporting claim preparation. Do not describe it as legal advice or a replacement for professional review.
+
+## Customer-education boundary
+
+- Explain what customers can accomplish, where functionality lives, when to use it, verified permissions or availability, review responsibilities, and troubleshooting.
+- Describe AI-assisted features by customer outcome. Do not expose prompts, model routing, orchestration, extraction pipelines, proprietary heuristics, confidence mechanics, internal processing architecture, or other engineering details that do not help a customer use Vala.
 
 ## Style
 

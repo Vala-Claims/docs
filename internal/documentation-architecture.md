@@ -14,16 +14,20 @@ The documentation system should:
 
 ## Source-of-truth hierarchy
 
-When sources disagree, use this order:
+For current customer-visible behavior, use this order:
 
 1. Production behavior in `app.valaclaims.com`
-2. Merged implementation in Vala GitHub repositories
-3. Completed Linear issues and acceptance criteria
-4. Current product terminology and design system
-5. Existing documentation
-6. Roadmap and strategy materials
+2. Implementation confirmed released to the relevant customer audience
+3. Completed Linear acceptance criteria and context for that released behavior
+4. Existing Help Center documentation
 
-Roadmap items must never be presented as available product functionality unless clearly labeled.
+For governance, terminology, product claims, and authority, use this order:
+
+1. Current canonical Vala Operating System
+2. Current accepted Product decisions and applicable authoritative records
+3. Historical or draft materials
+
+Merged but unreleased code is not current customer functionality. If current behavior conflicts with canonical policy or accepted Product intent, surface the mismatch for review rather than silently resolving it.
 
 ## Audience
 
@@ -47,55 +51,45 @@ Secondary audiences:
 ### Start here
 
 - Welcome to Vala
+- Navigating Vala
 - Quick start
-- Invite your team
-- Add your first veteran
-- Prepare your first claim
+- Add your first Client
 
-### Core workflows
+### Ask Vala
 
-- Organizations
-- Veterans
-- Claims
-- Records and evidence
-- Conditions
-- Reports
-- Forms
-- vSign
+- Ask Vala overview
+- Sources and citations and reviewing AI answers
+
+### Dashboard
+
+- Dashboard overview and customization
+
+### Contacts
+
+- Contacts overview
+- Clients, including the Client record and its Dashboard, Claims, Details, Forms, Documents, Messages, Conditions, Tasks, Relationships, Calendar, and Activity tabs
+- Contact views for Representatives, Providers, Organizations, and All Contacts
+
+### Claims
+
+- Claims overview and views
+- Claim record Details, Dates, History, and permission-controlled Financials
+
+### Workspaces and tools
+
 - Tasks
-- Automations
+- Notes
+- Calendar
+- Templates, including Documents, Questionnaires, reusable Report templates, and Messages
+- Workflows, including Active, Draft, and History
+- Calls
+- Calculators, including Backpay Calculator and Pension & A&A Calculator
 
-### AI capabilities
+### Account, organization, and resources
 
-- Chat with Vala
-- Evidence search and citations
-- Report generation
-- Condition identification
-- Timeline and chronology
-- AI limitations and human review
-
-### Submission and integrations
-
-- QuickSubmit
-- Browser extension
-- CRM integrations
-- VA integrations
-- API and webhooks
-
-### Administration
-
-- Organization settings
-- Team members
-- Roles and permissions
-- Billing and usage
-- Security and data handling
-
-### Support
-
-- Troubleshooting
-- Frequently asked questions
-- Contact support
-- Release notes
+- Account settings, Profile, Notifications, and Vala Network
+- Organization settings, Team, Roles & permissions, Billing, Integrations, and Security & data handling
+- FAQ, Troubleshooting, QuickSubmit, Release Notes, and Contact Support
 
 ## Standard page model
 
@@ -171,12 +165,11 @@ A change to a dependency does not automatically rewrite every downstream page. I
 
 ### Initial dependency graph
 
-- **Quick start** depends on organizations, team members, veterans, records, chat, reports, forms, and vSign.
-- **Reports** depends on veterans, records, evidence, conditions, chat, and report templates.
-- **Forms** depends on veterans, claims, conditions, records, organization data, and form templates.
+- **Quick start** depends on organizations, team members, Clients, Documents, Ask Vala, reports, forms, and vSign.
+- **Reports** depends on Clients, Documents, Conditions, Ask Vala, and report templates.
+- **Forms** depends on Clients, Claims, Conditions, Documents, organization data, and form templates.
 - **vSign** depends on forms, recipients, organization settings, and email delivery.
 - **Conditions** depends on rating decisions, code sheets, records, AI extraction, and manual review.
-- **Timeline and chronology** depends on records, document classification, service history, and medical events.
 - **QuickSubmit** depends on forms, downloaded files, browser support, authentication, and VA submission workflows.
 
 ## Documentation impact analysis
@@ -272,12 +265,14 @@ Do not commit or distribute font files. Use supported web-font or platform confi
 
 ## Content style
 
-- Use "veteran" rather than "client" when referring to the person whose claim is being prepared, unless the interface uses another term.
+- Use "veteran" naturally when referring to the person being represented. Use "Client" for an actual Vala interface object, view, button, breadcrumb, or Client record.
 - Use the exact current product labels.
+- Use **Ask Vala**, **Templates**, **Templates > Questionnaires**, **Workflows**, **History** or **Workflow History**, **Templates > Messages**, and **Calls**. Do not preserve prior labels just because they exist in historical docs.
 - Prefer direct instructions.
 - Explain review responsibility whenever AI-generated content is involved.
 - Do not imply legal advice, guaranteed outcomes, or fully autonomous claim preparation.
 - Separate available capabilities from planned capabilities.
+- Explain customer outcomes, workflows, verified availability, permissions, review responsibilities, and troubleshooting. Do not document prompts, system prompts, model routing, orchestration, extraction pipelines, proprietary heuristics, confidence mechanics, internal processing architecture, or other engineering details that do not help a customer use Vala.
 - Prefer short sections, steps, cards, and examples over dense prose.
 
 ## Ownership and review

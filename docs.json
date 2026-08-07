@@ -36,57 +36,102 @@
         "group": "Start Here",
         "pages": [
           "getting-started/welcome",
+          "getting-started/navigating-vala",
           "getting-started/quickstart",
           "getting-started/upload-your-first-veteran"
         ]
       },
       {
-        "group": "Veteran Records",
+        "group": "Ask Vala",
         "pages": [
-          "veteran-records/create-a-veteran",
-          "core-workflows/claims",
-          "core-workflows/forms-and-vsign",
-          "core-workflows/documents",
-          "core-workflows/messages",
-          "core-workflows/conditions"
+          "ai/chat-with-vala"
         ]
       },
       {
-        "group": "Tools",
+        "group": "Dashboard",
         "pages": [
-          "core-workflows/notes",
-          "core-workflows/library",
-          "core-workflows/web-forms",
-          "core-workflows/tasks",
-          "core-workflows/automations",
-          "core-workflows/message-templates",
+          "dashboard/overview"
+        ]
+      },
+      {
+        "group": "Contacts",
+        "pages": [
+          "contacts/overview",
           {
-            "group": "Calculators",
+            "group": "Clients",
             "pages": [
-              "backpay-calculator",
-              "untitled-page"
+              "veteran-records/create-a-veteran",
+              "core-workflows/forms-and-vsign",
+              "core-workflows/documents",
+              "core-workflows/messages",
+              "core-workflows/conditions"
             ]
           }
         ]
       },
       {
-        "group": "AI",
+        "group": "Claims",
         "pages": [
-          "ai/chat-with-vala",
+          "core-workflows/claims"
+        ]
+      },
+      {
+        "group": "Tasks",
+        "pages": [
+          "core-workflows/tasks"
+        ]
+      },
+      {
+        "group": "Notes",
+        "pages": [
+          "core-workflows/notes"
+        ]
+      },
+      {
+        "group": "Calendar",
+        "pages": [
+          "calendar/overview"
+        ]
+      },
+      {
+        "group": "Templates",
+        "pages": [
+          "templates/overview",
+          "core-workflows/library",
+          "core-workflows/web-forms",
           "core-workflows/reports",
-          "ai/timeline",
+          "core-workflows/message-templates"
+        ]
+      },
+      {
+        "group": "Workflows",
+        "pages": [
+          "core-workflows/automations"
+        ]
+      },
+      {
+        "group": "Calls",
+        "pages": [
           "ai/calls-and-transcripts"
         ]
       },
       {
-        "group": "Administration",
+        "group": "Calculators",
         "pages": [
+          "backpay-calculator",
+          "untitled-page"
+        ]
+      },
+      {
+        "group": "Account & Organization",
+        "pages": [
+          "administration/account-and-organization",
           "administration/team",
+          "administration/team-metrics",
+          "administration/revenue",
           "administration/billing",
           "administration/security",
-          "administration/organization-settings",
-          "administration/team-metrics",
-          "administration/revenue"
+          "administration/organization-settings"
         ]
       },
       {
@@ -94,6 +139,7 @@
         "pages": [
           "resources/faq",
           "resources/troubleshooting",
+          "core-workflows/quicksubmit",
           "resources/release-notes"
         ]
       }

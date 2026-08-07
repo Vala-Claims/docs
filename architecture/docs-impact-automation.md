@@ -50,16 +50,15 @@ After the impact analysis is trusted, the next phase can automatically open a dr
 ## Trigger categories now mapped
 
 - Conditions and rating decisions
-- Evidence and citations
-- Timeline and chronology
+- Documents and citations
 - Tasks and assignments
-- Automations and triggers
+- Workflows and triggers
 - Calls and transcripts
 - QuickSubmit and browser extension
 - Organization roles and permissions
 - Billing, plans, editions, limits, and feature visibility
-- Veterans, contacts, forms, PDF autofill, and vSign
-- Chat with Vala and reports
+- Clients, Contacts, forms, PDF autofill, and vSign
+- Ask Vala and reports
 
 ## Required human exceptions
 

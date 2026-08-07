@@ -116,6 +116,7 @@ pages:
     features: [claims, claim_records, claim_views]
     upstream_paths:
       - src/pages/claims.astro
+      - src/components/ClaimsPage/index.svelte
       - src/components/ClaimsManagement/**
       - src/components/ClientDetailsPage/Tabs/Claims/**
       - src/lib/navigation/workspaceNav.ts

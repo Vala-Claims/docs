@@ -66,6 +66,51 @@ pages:
     downstream_pages: [quickstart, forms_vsign]
     review: [text, screenshot]
 
+  client_dashboard:
+    path: veteran-records/client-dashboard.mdx
+    features: [clients, client_dashboard, widgets, claim_blockers, deadlines, signatures, tasks, messages]
+    upstream_paths:
+      - src/components/ClientDetailsPage/Tabs/Dashboard/**
+      - src/lib/clientDashboard/**
+      - backend/internal/handlers/client_dashboard.go
+      - backend/internal/service/client_dashboard.go
+      - backend/internal/service/client_dashboard_summary.go
+    review: [text, screenshot]
+
+  client_details:
+    path: veteran-records/client-details.mdx
+    features: [clients, client_details, primary_point_of_contact, client_fields, client_notes]
+    upstream_paths:
+      - src/components/ClientDetailsPage/Tabs/Details/**
+      - src/components/ClientForm.svelte
+      - src/components/Contacts/PrimaryPocSelector.svelte
+      - backend/internal/handlers/client.go
+      - backend/internal/service/client.go
+    review: [text, screenshot]
+
+  relationships:
+    path: veteran-records/relationships.mdx
+    features: [contacts, relationships, primary_point_of_contact, client_portal]
+    upstream_paths:
+      - src/components/ClientDetailsPage/Tabs/Relationships/**
+      - src/components/Contacts/PrimaryPocSelector.svelte
+      - backend/internal/handlers/contact.go
+      - backend/internal/handlers/contact_portal.go
+      - backend/internal/service/contact.go
+    review: [text, screenshot]
+
+  client_activity:
+    path: veteran-records/activity.mdx
+    features: [clients, activity, inbox, tasks, messages, documents, claims, calendar]
+    upstream_paths:
+      - src/components/ClientDetailsPage/Tabs/Activity/**
+      - src/lib/inboxActivityRoutes.ts
+      - backend/internal/handlers/client_activity.go
+      - backend/internal/handlers/inbox.go
+      - backend/internal/service/client_activity.go
+      - backend/internal/service/org_activity.go
+    review: [text, screenshot]
+
   claims:
     path: core-workflows/claims.mdx
     features: [claims, claim_records, claim_views]
@@ -73,6 +118,7 @@ pages:
       - src/pages/claims.astro
       - src/components/ClaimsPage/**
       - src/components/ClaimsManagement/**
+      - src/components/ClientDetailsPage/Tabs/Claims/**
       - src/lib/navigation/workspaceNav.ts
       - backend/internal/handlers/claim.go
       - backend/internal/service/claim.go
@@ -148,6 +194,7 @@ pages:
     upstream_paths:
       - src/pages/calendar.astro
       - src/components/CalendarPage/**
+      - src/components/ClientDetailsPage/Tabs/Calendar/**
       - backend/internal/handlers/calendar.go
       - backend/internal/service/calendar.go
     review: [text, screenshot]
@@ -190,6 +237,15 @@ pages:
       - backend/internal/service/message_template.go
     review: [text, screenshot]
 
+  messages:
+    path: core-workflows/messages.mdx
+    features: [messages, client_messages, message_templates, client_portal]
+    upstream_paths:
+      - src/components/ClientDetailsPage/Tabs/Messages/**
+      - backend/internal/handlers/message.go
+      - backend/internal/service/message.go
+    review: [text, screenshot]
+
   forms_vsign:
     path: core-workflows/forms-and-vsign.mdx
     features: [forms, pdf_autofill, wysiwyg, vsign, signing_packets, client_portal]
@@ -216,6 +272,7 @@ pages:
     features: [tasks, assignments, due_dates, task_status]
     upstream_paths:
       - src/components/**/*Task*
+      - src/components/ClientDetailsPage/Tabs/Tasks/**
       - backend/internal/**/*task*
     downstream_pages: [workflows, quickstart]
     review: [text, screenshot]
@@ -299,7 +356,7 @@ pages:
     review: [text, screenshot]
 
 feature_edges:
-  primary_point_of_contact: {affects: [clients, forms_vsign, quickstart]}
+  primary_point_of_contact: {affects: [clients, client_details, relationships, forms_vsign, quickstart]}
   signing_packets: {affects: [forms_vsign, quickstart]}
   pdf_autofill: {affects: [forms_vsign, clients, quickstart]}
   conditions: {affects: [conditions, clients, reports, quickstart]}
@@ -307,6 +364,7 @@ feature_edges:
   evidence: {affects: [documents, reports, ask_vala, quickstart]}
   ai_chat: {affects: [ask_vala, reports, quickstart]}
   tasks: {affects: [tasks, workflows, quickstart]}
+  messages: {affects: [messages, client_dashboard]}
   automations: {affects: [workflows, tasks, forms_vsign, quickstart]}
   calls: {affects: [calls, clients, ask_vala, quickstart]}
   quicksubmit: {affects: [quicksubmit, forms_vsign, documents, quickstart]}

@@ -61,10 +61,14 @@
             "group": "Clients",
             "pages": [
               "veteran-records/create-a-veteran",
+              "veteran-records/client-dashboard",
+              "veteran-records/client-details",
               "core-workflows/forms-and-vsign",
               "core-workflows/documents",
               "core-workflows/messages",
-              "core-workflows/conditions"
+              "core-workflows/conditions",
+              "veteran-records/relationships",
+              "veteran-records/activity"
             ]
           }
         ]

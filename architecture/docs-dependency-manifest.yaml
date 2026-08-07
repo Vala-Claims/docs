@@ -133,6 +133,7 @@ pages:
       - src/components/**/*Rating*
       - backend/internal/**/*condition*
       - backend/internal/**/*rating*
+      - agents/**/*condition*
     depends_on_pages: [clients, documents]
     downstream_pages: [reports, quickstart]
     review: [text, screenshot, walkthrough]
@@ -142,8 +143,12 @@ pages:
     features: [documents, evidence, citations, document_analysis, evidence_linking]
     upstream_paths:
       - src/components/**/*Document*
+      - src/components/**/*Evidence*
+      - src/components/**/*Citation*
       - backend/internal/**/*document*
       - backend/internal/**/*evidence*
+      - agents/**/*document*
+      - agents/**/*evidence*
     downstream_pages: [ask_vala, reports, quickstart]
     review: [text, screenshot, walkthrough]
 
@@ -316,8 +321,9 @@ pages:
     features: [quicksubmit, browser_extension, submission, va_upload]
     upstream_paths:
       - src/components/**/*QuickSubmit*
-      - src/lib/quickSubmit.ts
-      - vala-addon/**
+      - src/pages/**/*quicksubmit*
+      - browser-extension/**
+      - extension/**
       - backend/internal/**/*submit*
     depends_on_pages: [forms_vsign, documents]
     downstream_pages: [quickstart]
@@ -328,7 +334,7 @@ pages:
     features: [organizations, settings, team_members, roles, permissions]
     upstream_paths:
       - src/components/**/*Organization*
-      - src/components/TeamManagement.svelte
+      - src/components/**/*Member*
       - src/components/**/*Permission*
       - backend/internal/**/*organization*
       - backend/internal/**/*permission*
@@ -340,9 +346,11 @@ pages:
     features: [billing, plans, usage_limits, overages, feature_visibility, editions]
     upstream_paths:
       - src/components/**/*Billing*
-      - src/lib/billingPlans.ts
-      - src/lib/stores/billingStore.ts
+      - src/components/**/*Plan*
+      - src/components/**/*Subscription*
       - backend/internal/**/*billing*
+      - backend/internal/**/*subscription*
+      - backend/internal/**/*entitlement*
       - backend/internal/**/*edition*
     downstream_pages: [welcome, quickstart, organization_admin]
     review: [text, screenshot]

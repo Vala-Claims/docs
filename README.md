@@ -2,6 +2,12 @@
 
 Customer-facing documentation for [Vala](https://valaclaims.com), the AI operating system for VA disability claims.
 
+## Repository identity
+
+This repository is the source for Vala's customer-facing Help Center. Its GitHub name is [`Vala-Claims/docs`](https://github.com/Vala-Claims/docs), despite the generic `docs` repository name.
+
+It is not the Vala application repository or a general internal-documentation store. Mintlify configuration, the app's documentation-impact workflow, and the opt-in `/docs-showcase` asset workflow reference this repository identity and its `images/` destination. Do not rename the repository or change those integration paths without a verified downstream migration plan.
+
 ## Local development
 
 The site is built with Mintlify. Install the current CLI, then run the preview from the repository root:

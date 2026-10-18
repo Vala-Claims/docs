@@ -42,6 +42,19 @@ Also confirm that every page in `docs.json` exists and every customer-facing pag
 
 The dependency manifest in `architecture/docs-dependency-manifest.yaml` maps product changes to customer-facing pages. The helper in `scripts/docs_impact.py` generates a review report for changed product files.
 
+## Screenshot assets
+
+Documentation screenshots live in [`images/README.md`](images/README.md). It is the repository gallery: it lists every stable Mintlify path and the command contributors use to refresh it after adding a generated image.
+
+Run the deterministic preflight before opening a documentation PR:
+
+```bash
+python3 scripts/screenshot_assets.py --write-catalog
+python3 scripts/screenshot_assets.py --validate
+```
+
+The preflight accepts PNG, JPEG, GIF, and WebP screenshots, checks file content and naming collisions, confirms every local `/images/...` MDX reference resolves, and requires meaningful alt text.
+
 ## Publishing
 
 Submit documentation changes through a pull request. Do not merge unvalidated navigation or link changes.

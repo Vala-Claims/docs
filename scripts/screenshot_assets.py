@@ -13,22 +13,31 @@ media-management service.
 from __future__ import annotations
 
 import argparse
+import posixpath
 import re
 import sys
+import zlib
 from dataclasses import dataclass
 from pathlib import Path
+from urllib.parse import unquote, urlsplit
 
 
 ROOT = Path(__file__).resolve().parents[1]
-IMAGES_DIR = ROOT / "images"
-CATALOG_PATH = IMAGES_DIR / "README.md"
 SUPPORTED_EXTENSIONS = {".png", ".jpg", ".jpeg", ".gif", ".webp"}
+FORMAT_BY_EXTENSION = {".png": "PNG", ".jpg": "JPEG", ".jpeg": "JPEG", ".gif": "GIF", ".webp": "WebP"}
 
 
 @dataclass(frozen=True)
 class Asset:
     path: Path
     relative_path: str
+    width: int | None
+    height: int | None
+
+
+@dataclass(frozen=True)
+class ImageInfo:
+    format: str
     width: int | None
     height: int | None
 
@@ -42,62 +51,219 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def png_dimensions(data: bytes) -> tuple[int, int] | None:
-    if data.startswith(b"\x89PNG\r\n\x1a\n") and len(data) >= 24 and data[12:16] == b"IHDR":
-        return int.from_bytes(data[16:20], "big"), int.from_bytes(data[20:24], "big")
-    return None
+def png_info(data: bytes) -> ImageInfo | None:
+    if not data.startswith(b"\x89PNG\r\n\x1a\n"):
+        return None
+    position = 8
+    width = height = None
+    idat_chunks: list[bytes] = []
+    seen_iend = False
+    while position < len(data):
+        if position + 12 > len(data):
+            raise ValueError("incomplete PNG chunk")
+        length = int.from_bytes(data[position : position + 4], "big")
+        chunk_type = data[position + 4 : position + 8]
+        end = position + 12 + length
+        if end > len(data):
+            raise ValueError("incomplete PNG chunk")
+        payload = data[position + 8 : position + 8 + length]
+        crc = int.from_bytes(data[position + 8 + length : end], "big")
+        if zlib.crc32(chunk_type + payload) & 0xFFFFFFFF != crc:
+            raise ValueError("PNG chunk checksum does not match")
+        if width is None:
+            if chunk_type != b"IHDR" or length != 13:
+                raise ValueError("PNG must begin with one IHDR chunk")
+            width = int.from_bytes(payload[0:4], "big")
+            height = int.from_bytes(payload[4:8], "big")
+            if not width or not height:
+                raise ValueError("PNG dimensions must be non-zero")
+        elif chunk_type == b"IHDR":
+            raise ValueError("PNG has more than one IHDR chunk")
+        if chunk_type == b"IDAT":
+            idat_chunks.append(payload)
+        if chunk_type == b"IEND":
+            if length != 0 or not idat_chunks:
+                raise ValueError("PNG is missing image data or has an invalid IEND chunk")
+            if end != len(data):
+                raise ValueError("PNG has data after IEND")
+            seen_iend = True
+            break
+        position = end
+    if not seen_iend:
+        raise ValueError("PNG is missing IEND")
+    try:
+        decoded_image_data = zlib.decompress(b"".join(idat_chunks))
+    except zlib.error as exc:
+        raise ValueError("PNG image data is incomplete") from exc
+    if not decoded_image_data:
+        raise ValueError("PNG is missing decoded image data")
+    return ImageInfo("PNG", width, height)
 
 
-def gif_dimensions(data: bytes) -> tuple[int, int] | None:
-    if data[:6] in {b"GIF87a", b"GIF89a"} and len(data) >= 10:
-        return int.from_bytes(data[6:8], "little"), int.from_bytes(data[8:10], "little")
-    return None
+def consume_gif_sub_blocks(data: bytes, position: int) -> int:
+    while True:
+        if position >= len(data):
+            raise ValueError("incomplete GIF data block")
+        length = data[position]
+        position += 1
+        if length == 0:
+            return position
+        if position + length > len(data):
+            raise ValueError("incomplete GIF data block")
+        position += length
 
 
-def jpeg_dimensions(data: bytes) -> tuple[int, int] | None:
+def gif_info(data: bytes) -> ImageInfo | None:
+    if data[:6] not in {b"GIF87a", b"GIF89a"}:
+        return None
+    if len(data) < 13:
+        raise ValueError("incomplete GIF header")
+    width = int.from_bytes(data[6:8], "little")
+    height = int.from_bytes(data[8:10], "little")
+    if not width or not height:
+        raise ValueError("GIF dimensions must be non-zero")
+    position = 13
+    if data[10] & 0x80:
+        color_table_length = 3 * (2 ** ((data[10] & 0x07) + 1))
+        if position + color_table_length > len(data):
+            raise ValueError("incomplete GIF color table")
+        position += color_table_length
+    saw_image = False
+    while position < len(data):
+        introducer = data[position]
+        position += 1
+        if introducer == 0x3B:
+            if not saw_image or position != len(data):
+                raise ValueError("GIF is missing image data or has trailing data")
+            return ImageInfo("GIF", width, height)
+        if introducer == 0x21:
+            if position >= len(data):
+                raise ValueError("incomplete GIF extension")
+            label = data[position]
+            position += 1
+            if label == 0xF9:
+                if position + 6 > len(data) or data[position] != 4 or data[position + 5] != 0:
+                    raise ValueError("invalid GIF graphic control extension")
+                position += 6
+            elif label in {0x01, 0xFF}:
+                if position >= len(data):
+                    raise ValueError("incomplete GIF extension")
+                block_length = data[position]
+                position += 1
+                if position + block_length > len(data):
+                    raise ValueError("incomplete GIF extension")
+                position = consume_gif_sub_blocks(data, position + block_length)
+            else:
+                position = consume_gif_sub_blocks(data, position)
+            continue
+        if introducer != 0x2C or position + 9 > len(data):
+            raise ValueError("invalid GIF block")
+        descriptor = data[position : position + 9]
+        position += 9
+        if descriptor[8] & 0x80:
+            color_table_length = 3 * (2 ** ((descriptor[8] & 0x07) + 1))
+            if position + color_table_length > len(data):
+                raise ValueError("incomplete GIF color table")
+            position += color_table_length
+        if position >= len(data) or not 2 <= data[position] <= 8:
+            raise ValueError("invalid GIF image data")
+        saw_image = True
+        position = consume_gif_sub_blocks(data, position + 1)
+    raise ValueError("GIF is missing trailer")
+
+
+JPEG_SOF_MARKERS = {0xC0, 0xC1, 0xC2, 0xC3, 0xC5, 0xC6, 0xC7, 0xC9, 0xCA, 0xCB, 0xCD, 0xCE, 0xCF}
+
+
+def jpeg_info(data: bytes) -> ImageInfo | None:
     if not data.startswith(b"\xff\xd8"):
         return None
     position = 2
-    while position + 9 < len(data):
+    width = height = None
+    while position < len(data):
         if data[position] != 0xFF:
-            return None
+            raise ValueError("invalid JPEG marker")
         while position < len(data) and data[position] == 0xFF:
             position += 1
+        if position >= len(data):
+            raise ValueError("incomplete JPEG marker")
         marker = data[position]
         position += 1
-        if marker in {0xD8, 0xD9} or 0xD0 <= marker <= 0xD7:
+        if marker == 0xD9:
+            if width is None or height is None or position != len(data):
+                raise ValueError("JPEG is missing image data or has trailing data")
+            return ImageInfo("JPEG", width, height)
+        if marker in {0xD8, 0x01} or 0xD0 <= marker <= 0xD7:
             continue
         if position + 2 > len(data):
-            return None
+            raise ValueError("incomplete JPEG segment")
         length = int.from_bytes(data[position : position + 2], "big")
-        if length < 2 or position + length > len(data):
-            return None
-        if marker in {0xC0, 0xC1, 0xC2, 0xC3, 0xC5, 0xC6, 0xC7, 0xC9, 0xCA, 0xCB, 0xCD, 0xCE, 0xCF}:
-            if length < 7:
-                return None
-            return (
-                int.from_bytes(data[position + 5 : position + 7], "big"),
-                int.from_bytes(data[position + 3 : position + 5], "big"),
-            )
-        position += length
-    return None
+        end = position + length
+        if length < 2 or end > len(data):
+            raise ValueError("incomplete JPEG segment")
+        payload = data[position + 2 : end]
+        if marker in JPEG_SOF_MARKERS:
+            if len(payload) < 6:
+                raise ValueError("invalid JPEG frame header")
+            height = int.from_bytes(payload[1:3], "big")
+            width = int.from_bytes(payload[3:5], "big")
+            components = payload[5]
+            if not width or not height or len(payload) != 6 + components * 3:
+                raise ValueError("invalid JPEG frame header")
+        if marker == 0xDA:
+            if width is None or height is None or end >= len(data) - 2 or not data.endswith(b"\xff\xd9"):
+                raise ValueError("JPEG is missing image data or EOI")
+            return ImageInfo("JPEG", width, height)
+        position = end
+    raise ValueError("JPEG is missing EOI")
 
 
-def webp_dimensions(data: bytes) -> tuple[int, int] | None:
-    if not (len(data) >= 16 and data[:4] == b"RIFF" and data[8:12] == b"WEBP"):
+def webp_info(data: bytes) -> ImageInfo | None:
+    if not data.startswith(b"RIFF"):
         return None
-    # WebP has several encodings. The signature is enough to catch corrupt
-    # uploads; dimensions are intentionally omitted when they are not trivial
-    # to derive without adding an image dependency.
-    return (0, 0)
+    if len(data) < 12 or data[8:12] != b"WEBP":
+        raise ValueError("invalid WebP RIFF header")
+    if int.from_bytes(data[4:8], "little") != len(data) - 8:
+        raise ValueError("incomplete WebP RIFF container")
+    position = 12
+    image_dimensions: tuple[int, int] | None = None
+    while position < len(data):
+        if position + 8 > len(data):
+            raise ValueError("incomplete WebP chunk")
+        chunk_type = data[position : position + 4]
+        length = int.from_bytes(data[position + 4 : position + 8], "little")
+        end = position + 8 + length
+        if end > len(data):
+            raise ValueError("incomplete WebP chunk")
+        payload = data[position + 8 : end]
+        if chunk_type == b"VP8 ":
+            if len(payload) < 10 or payload[3:6] != b"\x9d\x01\x2a":
+                raise ValueError("invalid WebP VP8 image data")
+            image_dimensions = (int.from_bytes(payload[6:8], "little") & 0x3FFF, int.from_bytes(payload[8:10], "little") & 0x3FFF)
+        elif chunk_type == b"VP8L":
+            if len(payload) < 5 or payload[0] != 0x2F:
+                raise ValueError("invalid WebP VP8L image data")
+            bits = int.from_bytes(payload[1:5], "little")
+            image_dimensions = ((bits & 0x3FFF) + 1, ((bits >> 14) & 0x3FFF) + 1)
+        elif chunk_type == b"VP8X":
+            if len(payload) != 10:
+                raise ValueError("invalid WebP VP8X image data")
+            image_dimensions = (
+                int.from_bytes(payload[4:7], "little") + 1,
+                int.from_bytes(payload[7:10], "little") + 1,
+            )
+        position = end + (length % 2)
+    if position != len(data) or image_dimensions is None or not all(image_dimensions):
+        raise ValueError("WebP is missing image data")
+    return ImageInfo("WebP", *image_dimensions)
 
 
-def image_dimensions(path: Path) -> tuple[int | None, int | None]:
+def image_info(path: Path) -> ImageInfo:
     data = path.read_bytes()
-    for decoder in (png_dimensions, gif_dimensions, jpeg_dimensions, webp_dimensions):
-        dimensions = decoder(data)
-        if dimensions is not None:
-            return dimensions
+    for decoder in (png_info, gif_info, jpeg_info, webp_info):
+        info = decoder(data)
+        if info is not None:
+            return info
     raise ValueError("file content is not a supported image")
 
 
@@ -108,20 +274,29 @@ def collect_assets(root: Path) -> tuple[list[Asset], list[str]]:
     if not images_dir.is_dir():
         return [], ["images directory is missing"]
 
+    images_root = images_dir.resolve()
     seen_stems: dict[tuple[str, str], Path] = {}
     for path in sorted(candidate for candidate in images_dir.rglob("*") if candidate.is_file() and candidate.name != "README.md"):
         suffix = path.suffix.lower()
         relative = path.relative_to(root).as_posix()
+        if path.is_symlink() or not is_within(path.resolve(), images_root):
+            errors.append(f"{relative}: screenshots must be regular files inside images/")
+            continue
         if suffix not in SUPPORTED_EXTENSIONS:
             errors.append(f"{relative}: unsupported format ({suffix or 'no extension'})")
             continue
         if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", path.stem):
             errors.append(f"{relative}: use lowercase kebab-case filenames")
         try:
-            width, height = image_dimensions(path)
+            info = image_info(path)
         except ValueError as exc:
             errors.append(f"{relative}: {exc}")
             continue
+        expected_format = FORMAT_BY_EXTENSION[suffix]
+        if info.format != expected_format:
+            errors.append(f"{relative}: {expected_format} extension conflicts with detected {info.format} content")
+            continue
+        width, height = info.width, info.height
         if width == 0 or height == 0:
             width = height = None
         key = (path.parent.relative_to(images_dir).as_posix(), path.stem)
@@ -156,9 +331,50 @@ def referenced_images(root: Path) -> list[str]:
 def verify_reference(root: Path, page: str, reference: str, alt: str, errors: list[str]) -> None:
     if not alt.strip():
         errors.append(f"{page}: {reference} must have meaningful alt text")
-    target = root / reference.lstrip("/")
+    try:
+        target = resolve_image_reference(root, reference)
+    except ValueError as exc:
+        errors.append(f"{page}: {reference} {exc}")
+        return
     if not target.is_file():
         errors.append(f"{page}: {reference} does not resolve to an image in this repository")
+
+
+def is_within(path: Path, directory: Path) -> bool:
+    try:
+        path.relative_to(directory)
+    except ValueError:
+        return False
+    return True
+
+
+def decode_reference(reference: str) -> str:
+    decoded = reference
+    while True:
+        next_value = unquote(decoded)
+        if next_value == decoded:
+            return decoded
+        decoded = next_value
+
+
+def resolve_image_reference(root: Path, reference: str) -> Path:
+    decoded = decode_reference(reference)
+    parsed = urlsplit(decoded)
+    path = parsed.path.replace("\\", "/")
+    if not path.startswith("/images/"):
+        raise ValueError("must use a root-relative /images/ path")
+    if ".." in path.split("/"):
+        raise ValueError("must not contain traversal segments")
+    normalized = posixpath.normpath(path)
+    if not normalized.startswith("/images/"):
+        raise ValueError("must remain inside images/")
+    images_root = (root / "images").resolve()
+    target = (root / normalized.lstrip("/")).resolve()
+    if not is_within(target, images_root):
+        raise ValueError("must resolve inside images/")
+    if target.suffix.lower() not in SUPPORTED_EXTENSIONS:
+        raise ValueError("must reference a supported image format")
+    return target
 
 
 def render_catalog(assets: list[Asset]) -> str:

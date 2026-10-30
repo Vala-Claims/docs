@@ -42,6 +42,14 @@ Also confirm that every page in `docs.json` exists and every customer-facing pag
 
 The dependency manifest in `architecture/docs-dependency-manifest.yaml` maps product changes to customer-facing pages. The helper in `scripts/docs_impact.py` generates a review report for changed product files.
 
+## Source ownership and portability
+
+`Vala-Claims/docs` is the canonical source for customer-facing Help Center content. Keep MDX pages, images, navigation, configuration, redirects, source provenance, automation inputs, and approval evidence in version control. Mintlify renders and publishes this source; it must not be the sole location for critical institutional knowledge, source evidence, automation state, or approval logic.
+
+Mintlify-specific dependencies include the `docs.json` schema and its theme, navigation, contextual options, and Mintlify MDX components. A future migration would retain this repository, map `docs.json` to the target platform's configuration, and replace Mintlify-specific components with the target's equivalents. This repository has not completed or tested such a migration.
+
+The production Mintlify workspace connection, deployment history, and current custom domain require authenticated workspace readback to verify. Do not treat a local Mintlify validation as proof that a source change has published.
+
 ## Screenshot assets
 
 Documentation screenshots live in [`images/README.md`](images/README.md). It is the repository gallery: it lists every stable Mintlify path and the command contributors use to refresh it after adding a generated image.

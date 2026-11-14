@@ -1,0 +1,149 @@
+---
+title: "Workflow trigger and action catalog"
+description: "Find Workflow names and integration identifiers."
+icon: "list"
+---
+
+## Overview
+
+A workflow has one **When** trigger and one or more ordered **Then** actions. The tables list the catalog returned by Vala's Workflow API. Names describe the event or action; filters and action configuration determine the precise behavior. Availability and valid combinations depend on the trigger context and your organization.
+
+## When to use
+
+Use this catalog to choose a workflow in the builder or identify types for an external integration.
+
+## Prerequisites
+
+- Access to Workflows in the full CRM.
+- For integrations, a key with `workflows:read` to read the catalog and `workflows:write` to create or update workflows.
+
+## Step-by-step
+
+1. Choose a **When** event and configure its filters. Date-relative triggers use a supported deadline or due date; scheduled triggers run daily or weekly and do not carry a Client or Claim.
+2. Choose and configure the ordered **Then** actions. Many actions require a Client or Claim in the trigger context. Resource-specific actions also require the appropriate organization resource.
+3. Review the workflow before activating it and inspect **History** after it runs.
+
+External agents can call `list_workflow_catalog` through Vala MCP or the External API endpoints `GET /external/v1/workflows/trigger-types` and `GET /external/v1/workflows/action-types` for the current catalog. API and MCP creates are drafts; updates return workflows to draft. Activation requires explicit confirmation through the status operation. See **Organization settings > Integrations > API Keys** for integration guidance.
+
+### When: triggers
+
+| Name | Identifier |
+| --- | --- |
+| New client added | `client_created` |
+| Client shared with organization | `client_shared` |
+| Client transferred into organization | `client_transferred_in` |
+| Client assigned to user | `client_assigned` |
+| Client portal setup completed | `client_portal_completed` |
+| Client status changed | `client_status_changed` |
+| Client tag changed | `client_tag_changed` |
+| Client approval status changed | `client_approval_status_changed` |
+| Attorney review outcome changed | `attorney_review_outcome_changed` |
+| Current representation changed | `client_representation_changed` |
+| Case status changed | `case_status_changed` |
+| New case created | `case_created` |
+| Case assigned to user | `case_assigned` |
+| Document uploaded | `document_uploaded` |
+| Document uploaded by client (portal) | `document_uploaded_portal` |
+| Document uploaded from web form / intake | `document_uploaded_form` |
+| Document uploaded via API / MCP | `document_uploaded_api` |
+| Document processing complete | `document_processing_complete` |
+| Document signed | `document_signed` |
+| Document sent | `document_sent` |
+| New task created | `task_created` |
+| Task completed | `task_completed` |
+| Task assigned to user | `task_assigned` |
+| New message from client | `message_from_client` |
+| Comment added | `comment_added` |
+| Call completed | `call_completed` |
+| Custom form submitted | `form_submitted` |
+| Intake form started | `intake_started` |
+| Intake form incomplete | `intake_incomplete` |
+| Intake form abandoned | `intake_abandoned` |
+| Intake form resumed | `intake_resumed` |
+| Intake form submitted | `intake_submitted` |
+| Calendar event created | `event_created` |
+| Calendar event updated | `event_updated` |
+| Calendar event cancelled | `event_cancelled` |
+| Event invite accepted | `event_invite_accepted` |
+| Event invite declined | `event_invite_declined` |
+| Event invite marked tentative | `event_invite_tentative` |
+| Appointment is set | `appointment_set` |
+| Appointment status changed | `appointment_status_changed` |
+| New note created | `note_created` |
+| Date relative (deadline / due date) | `date_relative` |
+| On a schedule | `scheduled` |
+| No action after a wait | `no_action` |
+| Submitted to VA | `va_submitted` |
+| New contact added | `contact_created` |
+| Contact converted to client | `contact_converted_to_client` |
+| Contact type changed | `contact_type_changed` |
+| Contact archived | `contact_archived` |
+| Contact portal setup completed | `contact_portal_completed` |
+| Claim tag changed | `claim_tag_changed` |
+| Claim custom field changed | `claim_custom_field_changed` |
+| Claim development stage changed | `claim_development_stage_changed` |
+| Follow-up date is set | `claim_follow_up_date_set` |
+| Post-decision response changed | `claim_post_decision_response_changed` |
+| Post-decision next action changed | `claim_post_decision_next_action_changed` |
+
+**No action after a wait** checks an outstanding unsigned document, unaccepted portal invitation, missing Client reply, or missing staff reply after the configured wait. Choose the subject and wait in the trigger's filters. Signing, accepting, or replying removes the outstanding item from consideration. This is a follow-up trigger, not a manual-run or “do nothing” option.
+
+### Then: actions
+
+| Name | Identifier |
+| --- | --- |
+| Send email | `send_email` |
+| Send templated message | `send_templated_message` |
+| Send text message | `send_client_sms` |
+| Create task | `create_task` |
+| Create task from template | `create_task_from_template` |
+| Create group of tasks from template | `create_task_group_from_template` |
+| Send webhook | `send_webhook` |
+| Send client portal invite | `send_client_portal_invite` |
+| Autofill form(s) | `autofill_form` |
+| Change client status | `change_client_status` |
+| Change client approval | `change_client_approval` |
+| Change attorney review outcome | `change_attorney_review_outcome` |
+| Set/Capture Referral Source | `set_referral_source` |
+| Set current representation | `set_current_representation` |
+| Add client tag | `add_client_tag` |
+| Remove client tag | `remove_client_tag` |
+| Add claim tag | `add_claim_tag` |
+| Remove claim tag | `remove_claim_tag` |
+| Set claim custom field | `set_claim_custom_field` |
+| Set claim development stage | `set_claim_development_stage` |
+| Set claim status | `set_claim_status` |
+| Add document tag | `add_document_tag` |
+| Send for e-signature | `send_esign_envelope` |
+| Send fee agreement | `send_fee_agreement_document` |
+| Create fee agreement | `create_fee_agreement_document` |
+| Auto-assign team member | `assign_team_member` |
+| Share with partner | `share_with_partner` |
+| Transfer to partner | `transfer_to_partner` |
+| Create calendar event | `create_event` |
+| Create note | `create_note` |
+| Delay / Wait | `wait` |
+| Repeat Until | `repeat_until` |
+| Change contact type | `change_contact_type` |
+| Send contact portal invite | `send_contact_portal_invite` |
+| Send appointment document checklist | `send_appointment_document_checklist` |
+| Post to channel | `post_to_channel` |
+| Send questionnaire | `send_questionnaire` |
+| Run AI report | `run_report_template` |
+
+## Best practices
+
+- Use **Document processing complete** when an action needs processed document content; an upload event may be too early.
+- **Submitted to VA** includes staff-confirmed QuickSubmit handoffs. It does not prove VA receipt.
+- Check live catalog responses as capabilities evolve, and review action configuration and permissions before activation.
+
+## Common mistakes
+
+- Using a scheduled trigger with an action that requires a Client
+- Running overlapping notifications for both a VA handoff and a Claim status change
+- Treating a catalog type as proof that every combination or organization is supported
+
+## Related pages
+
+- [Workflows](/core-workflows/automations)
+- [QuickSubmit](/core-workflows/quicksubmit)

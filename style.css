@@ -157,20 +157,18 @@ button:focus-visible {
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --vala-heading: #fffaf5;
-    --vala-border: #403832;
-    --vala-warm-deep: #241d18;
-  }
+html.dark {
+  --vala-heading: #fffaf5;
+  --vala-border: #403832;
+  --vala-warm-deep: #241d18;
+}
 
-  .vala-intro,
-  .vala-section-heading p,
-  .vala-support-strip p {
-    color: #c7beb6;
-  }
+html.dark .vala-intro,
+html.dark .vala-section-heading p,
+html.dark .vala-support-strip p {
+  color: #c7beb6;
+}
 
-  .vala-secondary-action {
-    background: #211d1a;
-  }
+html.dark .vala-secondary-action {
+  background: #211d1a;
 }

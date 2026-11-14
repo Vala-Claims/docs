@@ -119,7 +119,8 @@
       {
         "group": "Workflows",
         "pages": [
-          "core-workflows/automations"
+          "core-workflows/automations",
+          "core-workflows/workflow-catalog"
         ]
       },
       {

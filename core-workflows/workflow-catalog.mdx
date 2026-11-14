@@ -72,6 +72,7 @@ External agents can call `list_workflow_catalog` through Vala MCP or the Externa
 | New note created | `note_created` |
 | Date relative (deadline / due date) | `date_relative` |
 | On a schedule | `scheduled` |
+| No action after a wait | `no_action` |
 | Submitted to VA | `va_submitted` |
 | New contact added | `contact_created` |
 | Contact converted to client | `contact_converted_to_client` |
@@ -84,6 +85,8 @@ External agents can call `list_workflow_catalog` through Vala MCP or the Externa
 | Follow-up date is set | `claim_follow_up_date_set` |
 | Post-decision response changed | `claim_post_decision_response_changed` |
 | Post-decision next action changed | `claim_post_decision_next_action_changed` |
+
+**No action after a wait** checks an outstanding unsigned document, unaccepted portal invitation, missing Client reply, or missing staff reply after the configured wait. Choose the subject and wait in the trigger's filters. Signing, accepting, or replying removes the outstanding item from consideration. This is a follow-up trigger, not a manual-run or “do nothing” option.
 
 ### Then: actions
 

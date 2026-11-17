@@ -145,7 +145,8 @@
           "administration/revenue",
           "administration/billing",
           "administration/security",
-          "administration/organization-settings"
+          "administration/organization-settings",
+          "administration/external-api"
         ]
       },
       {

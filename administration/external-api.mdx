@@ -1,0 +1,61 @@
+---
+title: "External API"
+description: "Read clients and claims with an API key, including records a partner has shared."
+icon: "key"
+---
+
+## Overview
+
+The External API lets an authorized integration read clients and claims for your organization. The base path is `/external/v1/` on [app.valaclaims.com](https://app.valaclaims.com). Authenticate with an organization API key (`X-Api-Key`) or an OAuth bearer token from hosted MCP.
+
+Client list (`GET /external/v1/clients`), client get (`GET /external/v1/clients/:email`), claim list (`GET /external/v1/claims`), and claim get (`GET /external/v1/claims/:id`) take a `scope` parameter:
+
+- `own` (default). Clients and claims that belong to the API key's organization. Shared records are not included.
+- `shared_with_us`. Clients a partner organization has actively shared into the key's organization, and claims on those clients when the share includes claims (Partner Representative).
+- `all`. Own records plus `shared_with_us`.
+
+Assigned-only roles still see only their caseload, including the lead on a received share. A revoked share disappears on the next request. An organization that was never granted the client gets the same not-found result. Grants that can see the client but not claims do not receive claim records. Missing, revoked, and out-of-scope claims return not found.
+
+Claim list and get are read-only and use the `clients:read` scope. Creating or updating clients, documents, tasks, and reminders stays on the caller's own organization. Shared records are read-only on this API. Claim edits stay on staff APIs. Contacts are not on the External API.
+
+The same `scope` values are parameters on the MCP tools `list_clients`, `get_client`, `list_claims`, and `get_claim`.
+
+## When to use
+
+Use the External API when a CRM, form, or assistant needs to sync clients or read claims without opening the staff app. Use `shared_with_us` or `all` only when the integration should see records a partner has actively shared into your organization.
+
+## Prerequisites
+
+- An organization API key, or a hosted MCP connection, with `clients:read` for client and claim reads
+- The client email for a client get, or the claim id for a claim get
+- For shared claims, an active share whose grant includes claims
+
+## Step-by-step
+
+1. Create a key under Organization settings, then Integrations, then API Keys. Include `clients:read` when the integration lists or reads claims.
+2. Call `GET /external/v1/clients` or `GET /external/v1/claims`. Omit `scope` to keep the default `own`. Pass `scope=shared_with_us` or `scope=all` when you need shared records.
+3. Read one record with `GET /external/v1/clients/:email` or `GET /external/v1/claims/:id`, using the same `scope` values.
+4. For an AI assistant, connect hosted MCP and use `list_clients`, `get_client`, `list_claims`, and `get_claim`. Pass the same `scope` parameter. Claim tools use `clients:read`.
+
+Writes ignore `scope` and stay on your own organization. Do not use this API to edit a claim or to read contacts.
+
+The in-app Integration Guide (Organization settings, Integrations, View Integration Guide) uses the same routes and scope values.
+
+## Best practices
+
+- Leave `scope` at `own` unless the integration is supposed to see shared work.
+- Treat a not-found claim as missing, revoked, or out of scope. Do not retry it as a write.
+- Keep claim changes in the staff app. This API only lists and reads claims.
+
+## Common mistakes
+
+- Expecting `own` to include clients or claims a partner shared with you
+- Reading claims from a grant that can see the client but not claims
+- Trying to create, update, or delete a claim, or to read contacts, on the External API
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="Organization Settings" icon="sliders" href="/administration/organization-settings">Review organization configuration.</Card>
+  <Card title="Claims" icon="folder" href="/core-workflows/claims">Work claims in the staff app.</Card>
+</CardGroup>

@@ -352,7 +352,7 @@ pages:
     review: [text, screenshot]
 
   pension_calculator:
-    path: untitled-page.mdx
+    path: pension-and-aa.mdx
     features: [pension_calculator, calculators]
     upstream_paths:
       - src/pages/tools/pension-calculator.astro

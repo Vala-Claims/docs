@@ -6,42 +6,41 @@ icon: "bolt"
 
 ## Overview
 
-Workflows support repeatable work in Vala. Exact triggers, actions, and availability depend on the configured product experience.
+Workflows run ordered **Then** actions when a **When** event matches your filters. The [trigger and action catalog](/core-workflows/workflow-catalog) lists the available types and their integration identifiers.
 
 ## When to use
 
-Use Workflows when your organization has an approved repeatable workflow that should run consistently.
+Use a workflow for a repeatable process such as creating a follow-up task or notifying staff when a document is ready.
 
 ## Prerequisites
 
-- Administrative or workflow access as required
-- A clearly defined process
-- Approval from the appropriate organization owner
+- Workflows are available in the full CRM, not Community or Partner Edition.
+- Access depends on your role, organization settings, workflow locks, and office scope. Ask an owner or admin if you cannot manage a workflow.
+- Prepare any templates, tags, checklists, or other resources the actions need.
 
 ## Step-by-step
 
-<Note>
-  Configuration instructions will be added after supported triggers, actions, and permissions are confirmed.
-</Note>
+1. Open **Workflows** and choose **New Workflow** or **Create Workflow**. If a menu appears, choose **Builder**. Alternatively, open **Recipes** and choose **Use recipe**.
+2. Choose a **When** trigger and narrow it with filters where needed. Add and configure the **Then** actions in order.
+3. Review recipients, linked resources, and the **Active** setting before saving. Turn **Active** off if the workflow should remain a draft. Recipes can start with **Active** on.
+4. Review definitions in **Active** or **Draft**. Select a card to preview it, or use its edit control to change it.
+5. After activation, check **History** for execution results and errors. Deactivate the workflow if it needs correction.
 
-## Workflow views
-
-Use <strong>Active</strong> for workflows in use, <strong>Draft</strong> for work not yet active, and <strong>History</strong> to review workflow activity.
+The AI Workflow Builder, when available, creates a draft for your review. Review every trigger, filter, action, and resource before saving or activating it.
 
 ## Best practices
 
-- Start with a narrow, reviewable scope.
-- Keep a human review step for consequential outputs.
-- Recheck workflows when your process changes.
+- Start with a narrow scope and verify results before expanding it.
+- Avoid overlapping workflows that send duplicate notifications.
+- Review consequential outputs and keep organization-specific resources current.
 
 ## Common mistakes
 
-- Enabling an untested workflow broadly
-- Using unclear triggering criteria
-- Failing to review automated results
+- Saving a recipe as active before reviewing its configuration
+- Choosing a trigger without the Client or Claim context an action needs
+- Assuming a workflow ran successfully without checking **History**
 
 ## Related pages
 
-<CardGroup cols={2}>
-   
-</CardGroup>
+- [Workflow trigger and action catalog](/core-workflows/workflow-catalog)
+- [Organization Settings](/administration/organization-settings)

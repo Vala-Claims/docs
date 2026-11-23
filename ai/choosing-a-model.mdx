@@ -1,0 +1,117 @@
+---
+title: "Choosing an AI model and thinking level"
+description: "Pick Auto or a specific Gemini model and thinking level for Ask Vala and the Vala Agent."
+icon: "sparkles"
+---
+
+## Overview
+
+Ask Vala and the Vala Agent can run on Auto or on a model and thinking level you choose. Auto is the default. It uses Gemini 3.8 Flash at the medium thinking level. Leave Auto on for everyday questions. Switch only when a task needs stronger reasoning, a faster cheaper model, or a different thinking depth.
+
+Usage is tracked for the staff member who sent the request. Organization totals roll up in Organization Settings and in Team Metrics. When offices are turned on for the organization, those views also show an office rollup. The organization may have a weekly usage cap. A higher thinking level costs more because thinking tokens are billed with the answer.
+
+This choice is for staff who already use Ask Vala. It does not change the client portal.
+
+## When to use
+
+Open the picker when Auto is not the right fit for the question in front of you.
+
+- Leave Auto on for everyday Ask Vala questions and ordinary Agent requests.
+- Choose a stronger model for hard claim analysis or a long evidence review.
+- Choose a lower-cost model for short structured tasks such as extraction or classification.
+- Raise the thinking level when the question needs more careful reasoning. Lower it when you want a faster, cheaper reply.
+
+## Prerequisites
+
+- Ask Vala is available on your account.
+- You are signed in as staff.
+- You know which client or piece of work the question is about.
+
+## Step-by-step
+
+<Steps>
+  <Step title="Open the composer">
+    Open Ask Vala from a client or claim, or open the Vala Agent composer.
+  </Step>
+  <Step title="Open the AI model control">
+    Choose the control named AI model on the composer. The list shows Auto, then each model with its thinking level. A row can read Gemini 4 Neon High.
+  </Step>
+  <Step title="Read the short description">
+    Each model row includes a short description of what it is good for. Search filters the list by model name.
+  </Step>
+  <Step title="Keep Auto or pick a row">
+    Auto stays selected until you pick a model. Vala saves the last choice and uses it on the next Ask Vala or Agent request.
+  </Step>
+</Steps>
+
+## Models
+
+The picker lists these models in this order.
+
+Gemini 4 Carbon. Strongest reasoning. Best for hard claim analysis and complex evidence review. Thinking levels are low, medium, and high. The default is medium.
+
+Gemini 4 Argon. A cheaper, faster Carbon. Same reasoning depth when cost or latency matters. Thinking levels are low, medium, and high. The default is medium.
+
+Gemini 4 Neon. Frontier-level, tuned for fast task completion. Use when Ask Vala or the Agent needs more power than Auto. Thinking levels are low, medium, high, and xhigh. The default is high.
+
+Gemini 4 Hydrogen. Everyday efficient model. Good for chat and drafting. Thinking levels are low, medium, high, and xhigh. The default is high.
+
+Gemini 3.8 Flash. Auto default. Balanced quality and cost for everyday Ask Vala. Thinking levels are low, medium, and high. The default is medium. Auto uses this model at medium.
+
+Gemini 3.5 Flash-Lite. Lowest-cost, high-volume option. Best for extraction, classification, and short structured tasks. Thinking levels are minimal, low, medium, and high. The default is minimal.
+
+## Rates
+
+Google bills each request by tokens, not as a flat price per call. The amounts below are US dollars per one million tokens. Cached input is the lower rate for input the service can reuse. Output includes the visible answer and thinking tokens. A higher thinking level spends more thinking tokens at the output rate. It does not change the rate. A short question and a long evidence review on the same model are different amounts. The weekly cap uses these catalog rates.
+
+These rates follow Google's published paid-tier prices as of November 23, 2026. Carbon, Argon, and Gemini 3.8 Flash change on the dates in the table.
+
+| Model | Input | Cached input | Output |
+| --- | --- | --- | --- |
+| Gemini 4 Carbon, through November 30, 2026 | $2 | $0.10 | $10 |
+| Gemini 4 Carbon, from December 1, 2026 | $4 | $0.20 | $20 |
+| Gemini 4 Argon, through November 30, 2026 | $2 | $0.10 | $10 |
+| Gemini 4 Argon, from December 1, 2026 | $4 | $0.20 | $20 |
+| Gemini 4 Neon | $3 | $0.15 | $15 |
+| Gemini 4 Hydrogen | $1.50 | $0.075 | $7.50 |
+| Gemini 3.8 Flash, through December 31, 2026 | $0.75 | $0.075 | $3.75 |
+| Gemini 3.8 Flash, from January 1, 2027 | $1.50 | $0.15 | $7.50 |
+| Gemini 3.5 Flash-Lite | $0.30 | $0.03 | $2.50 |
+
+## Thinking levels
+
+A thinking level is how much reasoning the model does before it answers. The levels are minimal, low, medium, high, and xhigh. Not every model offers every level. The open list always shows the level in the row name, such as Gemini 4 Carbon Medium.
+
+A higher level can help a hard question. It also uses more thinking tokens, and those tokens are billed, so the request costs more. Minimal and low are the cheaper settings. Medium is the Auto setting on Gemini 3.8 Flash. High and xhigh spend more thinking before the visible answer.
+
+If the organization reaches its weekly cap, a later request may fall back to Auto or stop until the week resets. The message names the reset time. Usage still rolls up to the staff member, the organization, and the office when offices are on.
+
+## Best practices
+
+- Leave Auto on unless you have a reason to change it.
+- Match the model to the task. Use Carbon for hard analysis, Hydrogen for everyday chat and drafting, and Flash-Lite for short structured work.
+- Drop the thinking level when a lookup or short draft does not need deep reasoning.
+- Read the citations and the source records before you rely on an answer.
+- Watch the weekly usage warning so a cap does not interrupt a long review.
+
+## Common mistakes
+
+<Warning>
+  A higher thinking level is not a guarantee of a better answer. Review the sources either way.
+</Warning>
+
+- Switching to the strongest model for every short question
+- Treating a generated answer as legal or professional advice
+- Ignoring a weekly cap warning and expecting the same model to keep running
+- Assuming the client portal uses the staff model you picked
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="Chat with Vala" icon="messages" href="/ai/chat-with-vala">
+    Ask focused questions and verify the sources.
+  </Card>
+  <Card title="Team Metrics" icon="chart-simple" href="/administration/team-metrics">
+    Review organization activity, including AI usage when that section is shown.
+  </Card>
+</CardGroup>

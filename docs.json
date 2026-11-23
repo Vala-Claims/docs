@@ -44,7 +44,8 @@
       {
         "group": "Ask Vala",
         "pages": [
-          "ai/chat-with-vala"
+          "ai/chat-with-vala",
+          "ai/choosing-a-model"
         ]
       },
       {

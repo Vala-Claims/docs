@@ -2,6 +2,12 @@
 
 The Help Center is a customer-facing extension of the Vala application. Keep changes clear, accurate, and aligned with the product.
 
+## Repository scope
+
+`Vala-Claims/docs` is the Mintlify source repository for Vala's customer-facing Help Center. The repository name is intentionally retained for compatibility with the documentation-impact workflow and `/docs-showcase` asset output. It is not the Vala application repository or a general internal-documentation store.
+
+Do not rename the repository or redirect its asset destination as part of documentation work. A rename requires a separately approved, verified migration of downstream GitHub, Mintlify, and asset-generation references.
+
 ## Writing guidelines
 
 - Use active voice and address the reader as “you.”

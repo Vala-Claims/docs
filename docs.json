@@ -1,6 +1,12 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "maple",
+  "redirects": [
+    {
+      "source": "/untitled-page",
+      "destination": "/pension-and-aa"
+    }
+  ],
   "name": "Vala Help Center",
   "colors": {
     "primary": "#F95B00",
@@ -120,7 +126,8 @@
       {
         "group": "Workflows",
         "pages": [
-          "core-workflows/automations"
+          "core-workflows/automations",
+          "core-workflows/workflow-catalog"
         ]
       },
       {
@@ -133,7 +140,7 @@
         "group": "Calculators",
         "pages": [
           "backpay-calculator",
-          "untitled-page"
+          "pension-and-aa"
         ]
       },
       {

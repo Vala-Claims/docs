@@ -1,0 +1,134 @@
+---
+title: "Choosing an AI model and thinking level"
+description: "Pick the right Gemini model and thinking level for Ask Vala, the Vala Agent, and everyday drafting."
+icon: "sparkles"
+---
+
+## Overview
+
+Vala lets you choose which Gemini model powers **Ask Vala**, the **Vala Agent**, and other staff-facing AI in your organization. You can leave **Auto** on for balanced everyday work, or pick a specific model and thinking level when you need more speed, depth, or cost control.
+
+AI usage is tracked for each staff member, rolled up for organization and office administrators, and counted toward your organization's weekly allowance based on your plan. Higher thinking levels use more of that allowance because the model spends additional effort on internal reasoning.
+
+## When to use
+
+Use this guide when you:
+
+- See the model picker in **Ask Vala** or the **Vala Agent** and are not sure what to choose
+- Need stronger reasoning for a difficult claim or a large evidence review
+- Want faster, lower-cost answers for short lookups or drafting
+- Hit a weekly usage warning and need to lower cost until the cap resets
+
+## Prerequisites
+
+- A staff account that can use **Ask Vala** or the **Vala Agent**
+- AI enabled for your organization
+- Permission to use AI features on the Client or workflow you are working in
+
+## Step-by-step
+
+### Leave Auto on for most work
+
+**Auto** is the default. It uses **Gemini 3.8 Flash** at the **medium** thinking level. That pairing is tuned for everyday **Ask Vala** questions: solid quality, predictable speed, and reasonable use of your weekly allowance.
+
+Stay on **Auto** unless you have a clear reason to switch, such as a hard analysis task, a tight deadline, or an administrator asking the team to conserve usage.
+
+### Open the model picker
+
+1. In **Ask Vala**, open the model control in the chat composer (near where you type your question).
+2. In the **Vala Agent**, open the model control in the Agent conversation composer.
+3. Choose **Auto**, or select a model name and a thinking level. The list shows entries such as **Gemini 3.8 Flash Medium** (model plus thinking level).
+4. Send your message. Vala uses your selection for that conversation according to product behavior in your environment.
+
+<Note>
+If your organization reaches its weekly AI allowance, Vala may warn you, switch you back to **Auto**, or pause AI until the weekly reset. Administrators see org-level totals in **Organization Settings** and related team views.
+</Note>
+
+### Pick a model for the job
+
+| Model | What it is good for |
+| --- | --- |
+| **Gemini 4 Carbon** | Strongest reasoning. Best for hard claim analysis and complex evidence review. |
+| **Gemini 4 Argon** | A cheaper, faster **Carbon**. Same reasoning depth when cost or latency matters. |
+| **Gemini 4 Neon** | Frontier-level, tuned for fast task completion. Use when **Ask Vala** or the **Agent** needs more power than **Auto**. |
+| **Gemini 4 Hydrogen** | Everyday efficient model. Good for chat and drafting. |
+| **Gemini 3.8 Flash** | **Auto** default. Balanced quality and cost for everyday **Ask Vala**. |
+| **Gemini 3.5 Flash-Lite** | Lowest-cost, high-volume option. Best for extraction, classification, and short structured tasks. |
+
+**Gemini 4 Carbon**  
+Use for the hardest questions: weighing conflicting evidence, long medical or service narratives, multi-step claim strategy, or anything where missing a detail is costly. Prefer **medium** or **high** thinking when the record is dense.
+
+**Gemini 4 Argon**  
+Use when you want **Carbon**-class reasoning but need a quicker turn or lower usage cost. Good for the same kinds of analysis with slightly less headroom than **Carbon** at the highest thinking levels.
+
+**Gemini 4 Neon**  
+Use when **Auto** feels too light but you still want strong task completion, including multi-step **Agent** workflows. Strong choice for structured research passes across a Client record.
+
+**Gemini 4 Hydrogen**  
+Use for day-to-day chat, summarizing notes, drafting messages, and rephrasing content. Often the right balance when **Neon** or **Carbon** would be more than you need.
+
+**Gemini 3.8 Flash**  
+Use when you manually match **Auto** (for example, to pin **medium** thinking) or when administrators ask the team to standardize on the default model.
+
+**Gemini 3.5 Flash-Lite**  
+Use for quick lookups, simple classification, yes-or-no style checks, and short structured outputs. Pair with **minimal** or **low** thinking when speed and cost matter most.
+
+### Choose a thinking level
+
+Thinking levels control how much internal reasoning the model applies before it answers. More thinking usually means deeper reasoning, slower responses, and higher usage against your weekly allowance.
+
+| Thinking level | Typical effect |
+| --- | --- |
+| **minimal** | Fastest, lightest reasoning. Available on **Gemini 3.5 Flash-Lite** only. |
+| **low** | Quicker answers with less depth. |
+| **medium** | Balanced default for many models, including **Auto**. |
+| **high** | Deeper reasoning for harder questions. |
+| **xhigh** | Maximum reasoning depth. Available on **Gemini 4 Neon** and **Gemini 4 Hydrogen** only. |
+
+**Thinking levels each model supports**
+
+| Model | Thinking levels |
+| --- | --- |
+| Gemini 4 Carbon | low, medium, high |
+| Gemini 4 Argon | low, medium, high |
+| Gemini 4 Neon | low, medium, high, xhigh |
+| Gemini 4 Hydrogen | low, medium, high, xhigh |
+| Gemini 3.8 Flash | low, medium, high |
+| Gemini 3.5 Flash-Lite | minimal, low, medium, high |
+
+Start with the default thinking level for the model you pick. Raise the level when answers feel shallow on a complex record. Lower the level when you are doing simple drafting or high-volume lookups.
+
+### Understand usage and weekly limits
+
+- Vala records AI usage **per staff user**, including thinking-related usage bundled into token totals shown in administrator views.
+- **Organization owners** and authorized administrators see rolled-up usage for the whole organization.
+- When **offices** are enabled for your organization, usage can also roll up at the office level in metrics and team views.
+- Each plan includes a **weekly allowance** for AI usage. Exact caps depend on your subscription tier and any custom settings your administrator applies.
+- When usage is high, switch to **Auto**, **Gemini 3.5 Flash-Lite**, or a lower thinking level until the weekly period resets.
+
+## Best practices
+
+- Default to **Auto** unless the task clearly needs a stronger or faster model.
+- Match the model to the work: **Carbon** or **Argon** for hard analysis, **Flash-Lite** for quick structured tasks, **Hydrogen** for drafting.
+- Raise thinking level only for the messages that need it, then step back down.
+- Verify important facts and citations in source records regardless of model choice.
+- Administrators: review per-user and org totals regularly so teams stay within the weekly allowance.
+
+## Common mistakes
+
+<Warning>
+Higher models and thinking levels improve reasoning on difficult work, but they do not replace your professional judgment or independent record review.
+</Warning>
+
+- Using **Carbon** at **high** thinking for every message and exhausting the weekly allowance early
+- Leaving **xhigh** on for simple drafting tasks
+- Switching models without re-checking citations on material facts
+- Assuming a veteran-facing or client-portal experience uses the same picker (staff surfaces only)
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="Ask Vala" icon="messages" href="/ai/chat-with-vala">Ask focused questions across Client records.</Card>
+  <Card title="Organization Settings" icon="sliders" href="/administration/organization-settings">Review organization-level configuration and usage views.</Card>
+  <Card title="Team Metrics" icon="chart-simple" href="/administration/team-metrics">Review team activity and related metrics.</Card>
+</CardGroup>

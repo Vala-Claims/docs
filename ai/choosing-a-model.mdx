@@ -60,6 +60,24 @@ Gemini 3.8 Flash. Auto default. Balanced quality and cost for everyday Ask Vala.
 
 Gemini 3.5 Flash-Lite. Lowest-cost, high-volume option. Best for extraction, classification, and short structured tasks. Thinking levels are minimal, low, medium, and high. The default is minimal.
 
+## Rates
+
+Google bills each request by tokens, not as a flat price per call. The amounts below are US dollars per one million tokens. Cached input is the lower rate for input the service can reuse. Output includes the visible answer and thinking tokens. A higher thinking level spends more thinking tokens at the output rate. It does not change the rate. A short question and a long evidence review on the same model are different amounts. The weekly cap uses these catalog rates.
+
+These rates follow Google's published paid-tier prices as of November 23, 2026. Carbon, Argon, and Gemini 3.8 Flash change on the dates in the table.
+
+| Model | Input | Cached input | Output |
+| --- | --- | --- | --- |
+| Gemini 4 Carbon, through November 30, 2026 | $2 | $0.10 | $10 |
+| Gemini 4 Carbon, from December 1, 2026 | $4 | $0.20 | $20 |
+| Gemini 4 Argon, through November 30, 2026 | $2 | $0.10 | $10 |
+| Gemini 4 Argon, from December 1, 2026 | $4 | $0.20 | $20 |
+| Gemini 4 Neon | $3 | $0.15 | $15 |
+| Gemini 4 Hydrogen | $1.50 | $0.075 | $7.50 |
+| Gemini 3.8 Flash, through December 31, 2026 | $0.75 | $0.075 | $3.75 |
+| Gemini 3.8 Flash, from January 1, 2027 | $1.50 | $0.15 | $7.50 |
+| Gemini 3.5 Flash-Lite | $0.30 | $0.03 | $2.50 |
+
 ## Thinking levels
 
 A thinking level is how much reasoning the model does before it answers. The levels are minimal, low, medium, high, and xhigh. Not every model offers every level. The open list always shows the level in the row name, such as Gemini 4 Carbon Medium.

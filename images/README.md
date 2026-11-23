@@ -13,6 +13,9 @@ This is the repository gallery for Help Center screenshots. Mintlify publishes f
 
 | Asset | Mintlify reference | Dimensions |
 | --- | --- | --- |
+| `images/cemetery-preregistration/client-card.png` | `/images/cemetery-preregistration/client-card.png` | 858 × 188 |
+| `images/cemetery-preregistration/office-toggle.png` | `/images/cemetery-preregistration/office-toggle.png` | 544 × 736 |
+| `images/cemetery-preregistration/send-dialog.png` | `/images/cemetery-preregistration/send-dialog.png` | 544 × 316 |
 | `images/claims/create-claim.png` | `/images/claims/create-claim.png` | 1440 × 900 |
 | `images/claims/dates.png` | `/images/claims/dates.png` | 1440 × 900 |
 | `images/claims/details.png` | `/images/claims/details.png` | 1440 × 900 |

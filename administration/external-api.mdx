@@ -44,7 +44,8 @@ The in-app Integration Guide (Organization settings, Integrations, View Integrat
 ## Best practices
 
 - Leave `scope` at `own` unless the integration is supposed to see shared work.
-- Treat a not-found claim as missing, revoked, or out of scope. Do not retry it as a write.
+- Check the API key or OAuth connection if you get `401 Unauthorized`. For `403 Forbidden`, check that the credential has `clients:read` and that the acting user has access to the organization.
+- Treat `404 Not Found` on a claim get as missing, revoked, or out of scope. A claim list omits those records. Do not retry a missing claim as a write.
 - Keep claim changes in the staff app. This API only lists and reads claims.
 
 ## Common mistakes

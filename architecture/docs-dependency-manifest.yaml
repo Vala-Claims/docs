@@ -81,6 +81,15 @@ pages:
     downstream_pages: [reports, quickstart]
     review: [text, screenshot, walkthrough]
 
+  choosing_a_model:
+    path: ai/choosing-a-model.mdx
+    features: [ai_chat, model_picker, thinking_level]
+    upstream_paths:
+      - src/components/Chat/**
+      - src/components/Agent/**
+    depends_on_pages: [chat_with_vala]
+    review: [text]
+
   chat_with_vala:
     path: ai/chat-with-vala.mdx
     features: [ai_chat, citations, document_questions]

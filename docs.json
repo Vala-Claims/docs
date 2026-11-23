@@ -73,6 +73,7 @@
         "group": "AI",
         "pages": [
           "ai/chat-with-vala",
+          "ai/choosing-a-model",
           "core-workflows/reports",
           "ai/timeline",
           "ai/calls-and-transcripts"
